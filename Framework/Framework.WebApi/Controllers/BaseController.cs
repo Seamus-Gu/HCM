@@ -1,9 +1,10 @@
 ﻿using Framework.Core.Constants;
+using Framework.Core.Resources;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Seed.Framework.WebApi
+namespace Framework.WebApi
 {
     [ApiController]
     public class BaseController : ControllerBase

@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Localization;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace System
 {
@@ -38,19 +37,19 @@ namespace System
         /// <returns></returns>
         public static string GetName(this Enum value) => Enum.GetName(value.GetType(), value) ?? value.ToString();
 
-        /// <summary>
-        /// 抛出异常
-        /// </summary>
-        /// <param name="enumValue"></param>
-        /// <param name="localizer"></param>
-        /// <param name="args"></param>
-        /// <returns></returns>
-        public static CodeException ToCodeException(this Enum enumValue, IStringLocalizer localizer, params object?[] args)
-        {
-            var code = Convert.ToInt32(enumValue);
-            var msg = string.Format(localizer[enumValue.GetName()], args);
+        ///// <summary>
+        ///// 抛出异常
+        ///// </summary>
+        ///// <param name="enumValue"></param>
+        ///// <param name="localizer"></param>
+        ///// <param name="args"></param>
+        ///// <returns></returns>
+        //public static CodeException ToCodeException(this Enum enumValue, IStringLocalizer localizer, params object?[] args)
+        //{
+        //    var code = Convert.ToInt32(enumValue);
+        //    var msg = string.Format(localizer[enumValue.GetName()], args);
 
-            return new CodeException(code, msg);
-        }
+        //    return new CodeException(code, msg);
+        //}
     }
 }

@@ -1,6 +1,13 @@
-﻿namespace PIHCM.Gen.Controllers
+﻿
+namespace PIHCM.Gen.Controllers
 {
-    public class GenTableController
+    [Route("api/[controller]")]
+    public class GenTableController : BaseController
     {
+        [HttpGet("test")]
+        public IActionResult Test()
+        {
+            return Success();
+        }
     }
 }

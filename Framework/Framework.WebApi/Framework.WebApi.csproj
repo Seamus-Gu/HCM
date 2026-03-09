@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Core\Framework.Core.csproj" />
+    <ProjectReference Include="..\Framework.IdGenerater\Framework.IdGenerater.csproj" />
+    <ProjectReference Include="..\Framework.SqlSugar\Framework.SqlSugar.csproj" />
+  </ItemGroup>
+
 </Project>

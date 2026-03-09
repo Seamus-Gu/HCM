@@ -1,9 +1,9 @@
 <Solution>
   <Folder Name="/API/">
-    <Project Path="Api/Api.Core/Api.Core.csproj" Id="4681aac5-7e3f-495d-ad63-ce2294df518c" />
+    <Project Path="Api/PIHCM.Api.Core/PIHCM.Api.Core.csproj" Id="0fc01cb0-b535-4e62-b473-e001b0f0d0d8" />
   </Folder>
   <Folder Name="/Auth/">
-    <Project Path="Auth/PIHCM.Auth/PIHCM.Auth.csproj" Id="0322b952-4e52-4e45-a9dc-bd34d71ef94b" />
+    <Project Path="Auth/PIHCM.Auth/PIHCM.Auth.csproj" Id="1e03e34f-3ccd-4597-af89-22a9cb9d8643" />
   </Folder>
   <Folder Name="/Core/">
     <Project Path="Core/PIHCM.Core/PIHCM.Core.csproj" Id="0fc19030-729f-4155-9e2f-f9e38e2a8340" />
@@ -12,13 +12,19 @@
     <Project Path="Core/PIHCM.Oss/PIHCM.Oss.csproj" Id="32765317-f633-46f0-8d8b-64c035652cfc" />
   </Folder>
   <Folder Name="/Framework/">
-    <Project Path="Framework/Framework.Platform/Framework.Platform.csproj" Id="92bd355b-b3a0-4a22-8ac7-89573e7a7f46" />
     <Project Path="Framework/Framework.Consul/Framework.Consul.csproj" Id="fe853b92-ccb4-4e16-9805-f4cc937d7d13" />
     <Project Path="Framework/Framework.Core/Framework.Core.csproj" Id="9d9e357a-10ac-4197-b04d-e42e18d977e9" />
     <Project Path="Framework/Framework.IdGenerater/Framework.IdGenerater.csproj" Id="b17a49b6-67a1-4214-a8d7-8541c3ef2b7b" />
+    <Project Path="Framework/Framework.Platform/Framework.Platform.csproj" Id="92bd355b-b3a0-4a22-8ac7-89573e7a7f46" />
     <Project Path="Framework/Framework.Redis/Framework.Redis.csproj" Id="b298c694-d825-4846-83e6-b42888a42fcb" />
     <Project Path="Framework/Framework.SqlSugar/Framework.SqlSugar.csproj" Id="bc4af11e-11a4-4707-a846-836d897407a8" />
+    <Project Path="Framework/Framework.WebApi/Framework.WebApi.csproj" Id="8f7bccca-f267-44a5-b394-d0cc1d4c3b9d" />
   </Folder>
-  <Folder Name="/Gateway/" />
+  <Folder Name="/Gateway/">
+    <Project Path="Gateway/PIHCM.Gateway/PIHCM.Gateway.csproj" Id="73937fae-0651-4cbe-b21d-8c0027cec7b2" />
+  </Folder>
   <Folder Name="/Modules/" />
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
 </Solution>

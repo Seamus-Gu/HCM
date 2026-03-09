@@ -45,29 +45,29 @@ namespace Framework.Platform
             //// Orm
             //builder.Services.AddSqlSugar(opeions.UseDatebase);
 
-            //builder.Services
-            //    .AddControllers(options =>
-            //    {
-            //        options.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
-            //        options.Filters.Add(new GlobalActionFilter());
-            //        options.Filters.Add(new GlobalExceptionFilter());
-            //    })
-            //    .AddJsonOptions(options =>
-            //    {
-            //        options.JsonSerializerOptions.Converters.Add(new BooleanConverter()); // 布尔处理
-            //        options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());//时间处理
-            //        options.JsonSerializerOptions.Converters.Add(new DateTimeNullableConverter());//时间处理
-            //        options.JsonSerializerOptions.Converters.Add(new LongConverter());//long类型处理
-            //        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;//忽略循环引用
-            //        options.JsonSerializerOptions.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;//处理乱码问题
-            //        options.JsonSerializerOptions.IncludeFields = true;//包含成员字段序列化
-            //        options.JsonSerializerOptions.AllowTrailingCommas = true;//允许尾随逗号
-            //        options.JsonSerializerOptions.WriteIndented = true;//是否应使用整齐打印
-            //        options.JsonSerializerOptions.ReadCommentHandling = JsonCommentHandling.Skip;//允许注释
-            //        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;//不区分大小写
-            //        options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;//驼峰
-            //        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;//驼峰
-            //    }); ;
+            builder.Services
+                .AddControllers(options =>
+                {
+                    //options.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
+                    //options.Filters.Add(new GlobalActionFilter());
+                    //options.Filters.Add(new GlobalExceptionFilter());
+                })
+                .AddJsonOptions(options =>
+                {
+                    //options.JsonSerializerOptions.Converters.Add(new BooleanConverter()); // 布尔处理
+                    //options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());//时间处理
+                    //options.JsonSerializerOptions.Converters.Add(new DateTimeNullableConverter());//时间处理
+                    //options.JsonSerializerOptions.Converters.Add(new LongConverter());//long类型处理
+                    //options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;//忽略循环引用
+                    //options.JsonSerializerOptions.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;//处理乱码问题
+                    //options.JsonSerializerOptions.IncludeFields = true;//包含成员字段序列化
+                    //options.JsonSerializerOptions.AllowTrailingCommas = true;//允许尾随逗号
+                    //options.JsonSerializerOptions.WriteIndented = true;//是否应使用整齐打印
+                    //options.JsonSerializerOptions.ReadCommentHandling = JsonCommentHandling.Skip;//允许注释
+                    //options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;//不区分大小写
+                    //options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;//驼峰
+                    //options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;//驼峰
+                }); ;
 
             //// 关闭自动验证
             //builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
@@ -97,30 +97,30 @@ namespace Framework.Platform
             return builder;
         }
 
-        //public static void InitConfigure(this IApplicationBuilder app)
-        //{
-        //    app.ConfigureApp();
+        public static void InitConfigure(this IApplicationBuilder app)
+        {
+            app.ConfigureApp();
 
-        //    app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
-        //    app.UseLocalization();
-        //    app.UseRouting();
+            //app.UseLocalization();
+            app.UseRouting();
 
-        //    if (App.IsDevelop)
-        //    {
-        //        app.UseFrameworkSwagger();
-        //    }
+            //if (App.IsDevelop)
+            //{
+            //    //app.UseFrameworkSwagger();
+            //}
 
-        //    app.UseAuthorization();
+            //app.UseAuthorization();
 
-        //    //app.UseMiniProfiler();
+            //app.UseMiniProfiler();
 
-        //    app.UseEndpoints(endpoints =>
-        //    {
-        //        endpoints.MapHealthChecks(FrameworkConstant.HEALTH_ROUTE);
-        //        endpoints.MapControllers();
-        //        endpoints.MapMagicOnionService();
-        //    });
-        //}
+            app.UseEndpoints(endpoints =>
+            {
+                //endpoints.MapHealthChecks(FrameworkConstant.HEALTH_ROUTE);
+                endpoints.MapControllers();
+                //endpoints.MapMagicOnionService();
+            });
+        }
     }
 }

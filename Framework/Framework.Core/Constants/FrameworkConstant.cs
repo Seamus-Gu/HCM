@@ -36,7 +36,6 @@
 
         //#endregion Swagger
 
-        //public const string SNOW_ID = "SnowId";
 
         //public const string FRAMEWORK_PREFIX = "Seed";
         //public const string DB_CONFIG = "Datebase";
@@ -59,6 +58,8 @@
 
         //public const string LAYOUT = "Layout";
         //public const string PARENT_VIEW = "ParentView";
+
+        public const string SNOW_ID = "SnowId";
 
         #region Result
 
