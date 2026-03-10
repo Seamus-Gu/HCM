@@ -1,0 +1,6 @@
+@PIHCM.Attendance_HostAddress = http://localhost:5166
+
+GET {{PIHCM.Attendance_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

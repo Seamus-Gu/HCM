@@ -1,7 +1,7 @@
 ﻿using SqlSugar;
 using Yitter.IdGenerator;
 
-namespace Seed.Framework.WebApi
+namespace Framework.WebApi
 {
     /// <summary>
     /// Provides a base class for entities with common audit properties such as identifier and timestamps.

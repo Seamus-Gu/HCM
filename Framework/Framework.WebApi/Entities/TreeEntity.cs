@@ -1,6 +1,6 @@
 ﻿using SqlSugar;
 
-namespace Seed.Framework.WebApi
+namespace Framework.WebApi
 {
     /// <summary>
     /// 树基类

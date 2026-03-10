@@ -23,7 +23,11 @@
   <Folder Name="/Gateway/">
     <Project Path="Gateway/PIHCM.Gateway/PIHCM.Gateway.csproj" Id="73937fae-0651-4cbe-b21d-8c0027cec7b2" />
   </Folder>
-  <Folder Name="/Modules/" />
+  <Folder Name="/Modules/">
+    <Project Path="Modules/PIHCM.Attendance/PIHCM.Attendance.csproj" Id="189bb312-225f-4163-ab73-8803a2942440" />
+    <Project Path="Modules/PIHCM.Leave/PIHCM.Leave.csproj" Id="2526caec-9d02-476a-9020-51b69ec67380" />
+    <Project Path="Modules/PIHCM.Payroll/PIHCM.Payroll.csproj" Id="7f77a91e-582f-411f-9dfb-fdfdcc0c3524" />
+  </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
   </Folder>
