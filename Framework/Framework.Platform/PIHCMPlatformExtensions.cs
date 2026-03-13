@@ -8,13 +8,18 @@ namespace Framework.Platform
     public static class PIHCMPlatformExtensions
     {
         /// <summary>
-        /// 初始化项目
+        /// 为 WebApplicationBuilder 实例添加 PIHCM 平台所需的核心服务和配置，包括控制器、JSON 选项、本地化、健康检查、服务发现、ID 生成等功能。
         /// </summary>
-        /// <param name="builder">ApplicationBuild</param>
-        /// <param name="action">启动配置(委托)</param>
-        /// <returns></returns>
+        /// <remarks>此方法应在应用程序启动时调用，以确保平台相关的服务和配置被正确注册。可通过 configureModules 参数扩展或自定义服务注册流程。部分服务如
+        /// Consul、日志、ORM 等可根据实际需求进行启用或调整。</remarks>
+        /// <param name="builder">要扩展的 WebApplicationBuilder 实例，作为应用程序服务和配置的注册入口。</param>
+        /// <param name="configureModules">可选的自定义模块配置委托。用于在平台服务注册过程中，进一步配置服务集合和应用配置。可以为 null。</param>
+        /// <returns>配置完成的 WebApplicationBuilder 实例，可用于后续的应用程序构建和启动。</returns>
         public static WebApplicationBuilder AddPIHCMPlatform(this WebApplicationBuilder builder, Action<IServiceCollection, IConfiguration>? configureModules = null)
         {
+            var opeions = new AppOptions();
+            action?.Invoke(opeions);
+
             var services = builder.Services;
             var config = builder.Configuration;
 
@@ -97,7 +102,13 @@ namespace Framework.Platform
             return builder;
         }
 
-        public static void InitConfigure(this IApplicationBuilder app)
+        /// <summary>
+        /// 配置并启用 PIHCM 平台的核心中间件和路由。应在应用程序启动时调用，以确保平台功能正常运行。
+        /// </summary>
+        /// <remarks>此方法应在应用程序启动配置期间调用，通常位于 Startup.cs 的 Configure 方法中。调用后将自动启用 HTTPS
+        /// 重定向、路由和控制器终结点映射。请确保在注册自定义中间件或终结点前调用本方法以保证平台兼容性。</remarks>
+        /// <param name="app">要配置的应用程序构建器实例。用于注册中间件和终结点。</param>
+        public static void UsePIHCMPlatform(this IApplicationBuilder app)
         {
             app.ConfigureApp();
 
@@ -123,4 +134,5 @@ namespace Framework.Platform
             });
         }
     }
+
 }

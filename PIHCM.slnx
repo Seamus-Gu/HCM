@@ -17,6 +17,7 @@
     <Project Path="Framework/Framework.IdGenerater/Framework.IdGenerater.csproj" Id="b17a49b6-67a1-4214-a8d7-8541c3ef2b7b" />
     <Project Path="Framework/Framework.Platform/Framework.Platform.csproj" Id="92bd355b-b3a0-4a22-8ac7-89573e7a7f46" />
     <Project Path="Framework/Framework.Redis/Framework.Redis.csproj" Id="b298c694-d825-4846-83e6-b42888a42fcb" />
+    <Project Path="Framework/Framework.Scriban/Framework.Scriban.csproj" Id="24764834-7ff4-4e60-a65b-8c47025fafa7" />
     <Project Path="Framework/Framework.SqlSugar/Framework.SqlSugar.csproj" Id="bc4af11e-11a4-4707-a846-836d897407a8" />
     <Project Path="Framework/Framework.WebApi/Framework.WebApi.csproj" Id="8f7bccca-f267-44a5-b394-d0cc1d4c3b9d" />
   </Folder>
