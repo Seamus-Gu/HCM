@@ -1,11 +1,10 @@
 ﻿namespace Framework.IdGenerater
 {
+    //请使用中文注释
     /// <summary>
-    /// Represents the configuration settings for machine identifier and sequence bit lengths used in ID generation.
+    /// 表示用于唯一标识生成方案的工作节点配置。
     /// </summary>
-    /// <remarks>This class is intended for internal use to configure parameters that influence the structure
-    /// of generated IDs, such as the unique worker identifier and the bit allocation for worker and sequence numbers.
-    /// Adjust these settings according to the requirements of your distributed ID generation strategy.</remarks>
+    /// <remarks>此类型用于配置分布式ID生成器的工作节点标识及其相关位数分配。通过调整各属性，可以灵活适配不同规模的分布式部署场景。</remarks>
     public class IdConfig
     {
         /// <summary>

@@ -1,26 +1,23 @@
-﻿using Framework.Core.Application;
-using Framework.Core.Constants;
+﻿using Framework.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Yitter.IdGenerator;
 
 namespace Framework.IdGenerater
 {
     /// <summary>
-    /// Provides extension methods for registering a distributed ID generator in the dependency injection container.
+    /// 为指定的服务集合添加分布式唯一ID生成器，使用配置的选项进行初始化。
     /// </summary>
-    /// <remarks>This class is intended to be used with dependency injection in ASP.NET Core or similar .NET
-    /// applications. It configures and registers a distributed ID generator using application-specific settings. The
-    /// generated IDs are suitable for use as unique identifiers across distributed systems.</remarks>
+    /// <remarks>该方法配置并注册基于 Snowflake 算法的分布式ID生成器，适用于分布式系统。生成器的选项（如 WorkerId
+    /// 和位数等）从应用程序配置中加载。为避免不同服务间ID冲突，请确保每个服务实例使用唯一的 WorkerId。</remarks>
     public static class IdGeneraterExtension
     {
+        //请使用中文注释
         /// <summary>
-        /// Adds a distributed unique ID generator to the specified service collection using the configured options.
+        /// 为依赖注入容器添加全局唯一ID生成器配置。
         /// </summary>
-        /// <remarks>This method configures and registers a Snowflake-style ID generator for use in
-        /// distributed systems. The generator options, such as worker ID and bit lengths, are loaded from application
-        /// configuration. Ensure that each service instance uses a unique worker ID to avoid ID collisions across
-        /// services.</remarks>
-        /// <param name="services">The service collection to which the ID generator will be added. Cannot be null.</param>
+        ///
+        /// <remarks>此方法将ID生成器配置为全局可用，适用于分布式系统中需要生成唯一ID的场景。请确保在微服务环境下为每个服务分配不同的WorkerId，以避免ID冲突。有关更多参数配置，请参考IdGeneratorOptions的定义。</remarks>
+        /// <param name="services">要注册ID生成器服务的依赖注入服务集合。</param>
         public static void AddIdGenerater(this IServiceCollection services)
         {
             var idConfig = App.GetConfig<IdConfig>(FrameworkConstant.SNOW_ID);

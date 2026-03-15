@@ -12,14 +12,19 @@
     <Project Path="Core/PIHCM.Oss/PIHCM.Oss.csproj" Id="32765317-f633-46f0-8d8b-64c035652cfc" />
   </Folder>
   <Folder Name="/Framework/">
+    <Project Path="Framework/Frameowrk.Oss/Frameowrk.Oss.csproj" Id="ef17bdca-fdb8-4d9e-81c7-89c8b4709fb8" />
     <Project Path="Framework/Framework.Consul/Framework.Consul.csproj" Id="fe853b92-ccb4-4e16-9805-f4cc937d7d13" />
     <Project Path="Framework/Framework.Core/Framework.Core.csproj" Id="9d9e357a-10ac-4197-b04d-e42e18d977e9" />
+    <Project Path="Framework/Framework.DI/Framework.DI.csproj" Id="cf1a7e29-6f47-4c59-8723-1999f25eb57c" />
     <Project Path="Framework/Framework.Grpc/Framework.Grpc.csproj" Id="f6225d35-0aa2-4be1-95a3-39571c4594e8" />
     <Project Path="Framework/Framework.IdGenerater/Framework.IdGenerater.csproj" Id="b17a49b6-67a1-4214-a8d7-8541c3ef2b7b" />
+    <Project Path="Framework/Framework.Logger/Framework.Logger.csproj" Id="ed895fd3-320a-4927-8b22-2c1a4b4f5a7a" />
     <Project Path="Framework/Framework.Platform/Framework.Platform.csproj" Id="92bd355b-b3a0-4a22-8ac7-89573e7a7f46" />
+    <Project Path="Framework/Framework.Quartz/Framework.Quartz.csproj" Id="f9e2b05e-ff47-4e96-a195-716873545212" />
     <Project Path="Framework/Framework.Redis/Framework.Redis.csproj" Id="b298c694-d825-4846-83e6-b42888a42fcb" />
     <Project Path="Framework/Framework.Scriban/Framework.Scriban.csproj" Id="24764834-7ff4-4e60-a65b-8c47025fafa7" />
     <Project Path="Framework/Framework.SqlSugar/Framework.SqlSugar.csproj" Id="bc4af11e-11a4-4707-a846-836d897407a8" />
+    <Project Path="Framework/Framework.Validation/Framework.Validation.csproj" Id="72b1ab1a-0cac-40dc-8723-b3eee2b41cd8" />
     <Project Path="Framework/Framework.WebApi/Framework.WebApi.csproj" Id="8f7bccca-f267-44a5-b394-d0cc1d4c3b9d" />
   </Folder>
   <Folder Name="/Gateway/">

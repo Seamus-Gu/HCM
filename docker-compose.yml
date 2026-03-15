@@ -24,43 +24,43 @@ services:
         networks:
             - seed
 
-    #seed.auth:
-    #    container_name: seed-auth
-    #    image: ${DOCKER_REGISTRY-}seed-auth
-    #    ports:
-    #        - "9011:443"
-    #    build:
-    #        context: .
-    #        dockerfile: Auth/Seed.Auth/Dockerfile
-    #    environment:
-    #        - TZ=Asia/Shanghai
-    #        - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT}
-    #        - ASPNETCORE_URLS=https://+:443;
-    #        - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Seed.Auth.pfx
-    #        - ASPNETCORE_Kestrel__Certificates__Default__Password=9PV8tFX5
-    #    volumes:
-    #        - ${CERT_PATH}Seed.Auth.pfx:/https/Seed.Auth.pfx:ro
-    #    networks:
-    #        - seed
+    seed.auth:
+       container_name: seed-auth
+       image: ${DOCKER_REGISTRY-}seed-auth
+       ports:
+           - "9011:443"
+       build:
+           context: .
+           dockerfile: Auth/Seed.Auth/Dockerfile
+       environment:
+           - TZ=Asia/Shanghai
+           - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT}
+           - ASPNETCORE_URLS=https://+:443;
+           - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Seed.Auth.pfx
+           - ASPNETCORE_Kestrel__Certificates__Default__Password=9PV8tFX5
+       volumes:
+           - ${CERT_PATH}Seed.Auth.pfx:/https/Seed.Auth.pfx:ro
+       networks:
+           - seed
 
-    #seed.core:
-    #    container_name: seed-core
-    #    image: ${DOCKER_REGISTRY-}seed-core
-    #    ports:
-    #        - "9012:443"
-    #    build:
-    #        context: .
-    #        dockerfile: Core/Seed.Core/Dockerfile
-    #    environment:
-    #        - TZ=Asia/Shanghai
-    #        - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT}
-    #        - ASPNETCORE_URLS=https://+:443;
-    #        - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Seed.Core.pfx
-    #        - ASPNETCORE_Kestrel__Certificates__Default__Password=9PV8tFX5
-    #    volumes:
-    #        - ${CERT_PATH}\Seed.Core.pfx:/https/Seed.Core.pfx:ro
-    #    networks:
-    #        - seed
+    seed.core:
+       container_name: seed-core
+       image: ${DOCKER_REGISTRY-}seed-core
+       ports:
+           - "9012:443"
+       build:
+           context: .
+           dockerfile: Core/Seed.Core/Dockerfile
+       environment:
+           - TZ=Asia/Shanghai
+           - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT}
+           - ASPNETCORE_URLS=https://+:443;
+           - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Seed.Core.pfx
+           - ASPNETCORE_Kestrel__Certificates__Default__Password=9PV8tFX5
+       volumes:
+           - ${CERT_PATH}\Seed.Core.pfx:/https/Seed.Core.pfx:ro
+       networks:
+           - seed
 
 networks:
     seed:
