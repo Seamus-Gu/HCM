@@ -1,5 +1,4 @@
-﻿using Framework.Core.Extensions;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,13 +16,10 @@ namespace Framework.Platform
         /// <returns>配置完成的 WebApplicationBuilder 实例，可用于后续的应用程序构建和启动。</returns>
         public static WebApplicationBuilder AddPIHCMPlatform(this WebApplicationBuilder builder, Action<IServiceCollection, IConfiguration>? configureModules = null)
         {
-            var opeions = new AppOptions();
-            action?.Invoke(opeions);
-
             var services = builder.Services;
             var config = builder.Configuration;
 
-            builder.InitApp();
+            //builder.InitApp();
 
             //// 配置中心
             //builder.Configuration.AddConsulConfiguration();
@@ -110,7 +106,7 @@ namespace Framework.Platform
         /// <param name="app">要配置的应用程序构建器实例。用于注册中间件和终结点。</param>
         public static void UsePIHCMPlatform(this IApplicationBuilder app)
         {
-            app.ConfigureApp();
+            //app.ConfigureApp();
 
             app.UseHttpsRedirection();
 

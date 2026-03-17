@@ -1,4 +1,6 @@
-﻿namespace System
+﻿using Framework.Core;
+
+namespace System
 {
     /// <summary>
     /// 提供一组用于扩展和简化对日期和时间（DateTime）常用操作的方法，包括年龄计算、工作日判断、日期范围判断、日期格式化等功能。适用于需要对日期进行常见处理的场景。扩展方法可直接用于 DateTime

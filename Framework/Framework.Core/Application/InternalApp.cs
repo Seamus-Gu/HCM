@@ -41,10 +41,7 @@ namespace Framework.Core
         {
         }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="builder"></param>
+
         internal static void InitInternalApp(WebApplicationBuilder builder)
         {
             _configuration = builder.Configuration;

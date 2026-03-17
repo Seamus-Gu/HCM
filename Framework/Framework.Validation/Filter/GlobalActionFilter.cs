@@ -1,15 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
-
-namespace Seed.Framework.Validation
+﻿namespace Seed.Framework.Validation
 {
-    public class GlobalActionFilter : ActionFilterAttribute
-    {
-        public override void OnActionExecuting(ActionExecutingContext context)
-        {
-            if (!context.ModelState.IsValid)
-            {
-                context.Result = new ValidationFailedResult(context.ModelState);
-            }
-        }
-    }
+    //public class GlobalActionFilter : ActionFilterAttribute
+    //{
+    //    public override void OnActionExecuting(ActionExecutingContext context)
+    //    {
+    //        if (!context.ModelState.IsValid)
+    //        {
+    //            context.Result = new ValidationFailedResult(context.ModelState);
+    //        }
+    //    }
+    //}
 }

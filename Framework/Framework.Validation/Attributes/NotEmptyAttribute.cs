@@ -1,5 +1,4 @@
-﻿using Seed.Framework.Core;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Seed.Framework.Validation
 {
@@ -7,7 +6,7 @@ namespace Seed.Framework.Validation
     {
         public NotEmptyAttribute()
         {
-            ErrorMessage = ValidationLocalization.Required;
+            //ErrorMessage = ValidationLocalization.Required;
         }
     }
 }

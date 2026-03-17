@@ -1,4 +1,4 @@
-using Framework.Core.Utils;
+using Framework.Core;
 
 namespace Framework.Scriban.Models;
 

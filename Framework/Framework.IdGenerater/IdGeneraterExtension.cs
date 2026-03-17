@@ -1,6 +1,4 @@
-﻿using Framework.Core;
-using Microsoft.Extensions.DependencyInjection;
-using Yitter.IdGenerator;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.IdGenerater
 {
@@ -20,16 +18,16 @@ namespace Framework.IdGenerater
         /// <param name="services">要注册ID生成器服务的依赖注入服务集合。</param>
         public static void AddIdGenerater(this IServiceCollection services)
         {
-            var idConfig = App.GetConfig<IdConfig>(FrameworkConstant.SNOW_ID);
-            // 创建 IdGeneratorOptions 对象，可在构造函数中输入 WorkerId： 微服务不同服务配置不同Id
-            var options = new IdGeneratorOptions(58);
-            // options.WorkerIdBitLength = 10; // 默认值6，限定 WorkerId 最大值为2^6-1，即默认最多支持64个节点。
-            // options.SeqBitLength = 6; // 默认值6，限制每毫秒生成的ID个数。若生成速度超过5万个/秒，建议加大 SeqBitLength 到 10。
-            // options.BaseTime = Your_Base_Time; // 如果要兼容老系统的雪花算法，此处应设置为老系统的BaseTime。
-            // ...... 其它参数参考 IdGeneratorOptions 定义。
+            //var idConfig = App.GetConfig<IdConfig>(FrameworkConstant.SNOW_ID);
+            //// 创建 IdGeneratorOptions 对象，可在构造函数中输入 WorkerId： 微服务不同服务配置不同Id
+            //var options = new IdGeneratorOptions(58);
+            //// options.WorkerIdBitLength = 10; // 默认值6，限定 WorkerId 最大值为2^6-1，即默认最多支持64个节点。
+            //// options.SeqBitLength = 6; // 默认值6，限制每毫秒生成的ID个数。若生成速度超过5万个/秒，建议加大 SeqBitLength 到 10。
+            //// options.BaseTime = Your_Base_Time; // 如果要兼容老系统的雪花算法，此处应设置为老系统的BaseTime。
+            //// ...... 其它参数参考 IdGeneratorOptions 定义。
 
-            // 保存参数（务必调用，否则参数设置不生效）：
-            YitIdHelper.SetIdGenerator(options);
+            //// 保存参数（务必调用，否则参数设置不生效）：
+            //YitIdHelper.SetIdGenerator(options);
         }
     }
 }

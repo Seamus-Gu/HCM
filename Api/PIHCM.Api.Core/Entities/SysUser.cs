@@ -5,37 +5,37 @@
         /// <summary>
         /// 用户名
         /// </summary>
-        [Excel("Core.UserName")]
+        //[Excel("Core.UserName")]
         public virtual string UserName { get; set; } = string.Empty;
 
         /// <summary>
         /// 昵称
         /// </summary>
-        [Excel("Core.NickName")]
+        //[Excel("Core.NickName")]
         public virtual string NickName { get; set; } = string.Empty;
 
         /// <summary>
         /// 邮箱
         /// </summary>
-        [Excel("Core.Email")]
+        //[Excel("Core.Email")]
         public virtual string? Email { get; set; }
 
         /// <summary>
         /// 电话号码
         /// </summary>
-        [Excel("Core.PhoneNumber")]
+        //[Excel("Core.PhoneNumber")]
         public virtual string? PhoneNumber { get; set; }
 
         /// <summary>
         /// 性别
         /// </summary>
-        [Excel("Core.Sex")]
+        //[Excel("Core.Sex")]
         public virtual string? Sex { get; set; }
 
         /// <summary>
         /// 头像
         /// </summary>
-        [Excel("Core.Avatar")]
+        //[Excel("Core.Avatar")]
         public virtual string? Avatar { get; set; }
 
         /// <summary>
