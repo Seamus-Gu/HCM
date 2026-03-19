@@ -1,13 +1,5 @@
 {
   "profiles": {
-    "http": {
-      "commandName": "Project",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:19030"
-    },
     "https": {
         "commandName": "Project",
         "environmentVariables": {
@@ -25,23 +17,8 @@
         },
         "publishAllPorts": true,
         "useSSL": true,
-        "containerRunArguments": "--network pihcm --name pihcm-gen",
-    },
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "containerRunArguments": "--network pihcm --name pihcm-gen"
     }
   },
-  "$schema": "https://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-        "applicationUrl": "http://localhost:19030/",
-        "sslPort": 5030
-    }
-  }
+  "$schema": "https://json.schemastore.org/launchsettings.json"
 }

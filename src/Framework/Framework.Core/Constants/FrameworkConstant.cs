@@ -2,70 +2,68 @@
 {
     public class FrameworkConstant
     {
+        #region 项目基础
         // 项目前缀
-        public const string FRAMEWORK_PREFIX = "Seed";
+        public const string FRAMEWORK_PREFIX = "PIHCM";
+        // 数据库雪花Id
+        public const string SNOW_ID = "SnowId";
+        // 基础配置项
+        public const string COMMON = "PIHCM.Common";
+        #endregion
 
-        // App
+        #region App
         public const string APP = "App";
         public const string SERVICE = "Service";
+        #endregion
 
-        //#region Consul
+        #region Consul
+        public const string CONSUL = "Consul";
+        #endregion
 
-        //public const string CONSUL = "Consul";
-        //public const string COMMON = "Seed.Common";
+        #region 常用协议
+        public const string HTTP = "http://";
+        public const string HTTPS = "https://";
+        #endregion
 
-        //#endregion Consul
+        #region Log (日志配置)
+        public const string LOG_CONFIG = "Logging";
+        public const string LOGGING_FILE_PATH = "logs/log-.log";
+        public const string LOG_OUT_PUT = "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level} {Properties:j} {Message} {NewLine} {Exception}";
+        #endregion
 
-        //#region Log
+        #region Localization (本地化)
+        public const string LOCALIZATION_PATH = "Resources";
+        public const string LANGUAGE = "Lang";
+        public const string LANGUAGE_CHINESE = "zh-CN";
+        public const string LANGUAGE_ENGLISH = "en-US";
+        #endregion
 
-        //public const string LOG_CONFIG = "Logging";
-        //public const string LOGGING_FILE_PATH = "logs/log-.log";
-        //public const string LOG_OUT_PUT = "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level} {Properties:j} {Message} {NewLine} {Exception}";
+        #region Swagger (API 文档)
+        public const string SWAGGER = "Swagger";
+        public const string SWAGGER_JSON = "swagger/v1/swagger.json";
+        public const string SWAGGER_HEADER = "Is-Swagger";
+        #endregion
 
-        //#endregion Log
+        #region Configurations (数据库/缓存/安全/存储/邮件/任务)
+        public const string DB_CONFIG = "Datebase";
+        public const string REDIS = "Redis";
+        public const string LOCALIZATION = "Localization";
+        public const string SECURITY_CONFIG = "Security";
+        public const string MINIO = "Minio";
+        public const string EMAIL = "Email";
+        public const string JOB = "Job";
+        public const string SECURITY = "Security";
+        #endregion
 
-        //#region Localization
-
-        //public const string LOCALIZATION_PATH = "Resources";
-        //public const string LANGUAGE = "Lang";
-        //public const string LANGUAGE_CHINESE = "zh-CN";
-        //public const string LANGUAGE_ENGLISH = "en-US";
-
-        //#endregion Localization
-
-        //#region Swagger
-
-        //public const string SWAGGER = "Swagger";
-        //public const string SWAGGER_JSON = "swagger/v1/swagger.json";
-        //public const string SWAGGER_HEADER = "Is-Swagger";
-
-        //#endregion Swagger
-
-
-        //public const string DB_CONFIG = "Datebase";
-        //public const string REDIS = "Redis";
-        //public const string LOCALIZATION = "Localization";
-        //public const string SECURITY_CONFIG = "Security";
-        //public const string MINIO = "Minio";
-        //public const string EMAIL = "Email";
-        //public const string JOB = "Job";
-        //public const string SECURITY = "Security";
-
-        //public const string HEALTH_ROUTE = "/health";
-
-        //public const string HTTP = "http://";
-        //public const string HTTPS = "https://";
-
-        //public const string ADMIN = "admin";
-        //public const string ADMIN_PERMISSION = "*:*:*";
-
-        //public const string LAYOUT = "Layout";
-        //public const string PARENT_VIEW = "ParentView";
-
-        public const string SNOW_ID = "SnowId";
+        #region Routing & UI (路由/布局/管理员)
+        public const string HEALTH_ROUTE = "/health";
+        public const string ADMIN = "admin";
+        public const string ADMIN_PERMISSION = "*:*:*";
+        public const string LAYOUT = "Layout";
+        public const string PARENT_VIEW = "ParentView";
+        #endregion
 
         #region Result
-
         public const string ADD = "Add";
         public const string EDIT = "Edit";
         public const string REMOVE = "Remove";
@@ -75,7 +73,6 @@
         public const string POST = "POST";
         public const string PUT = "PUT";
         public const string DELETE = "DELETE";
-
         #endregion Result
     }
 }

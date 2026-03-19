@@ -5,7 +5,7 @@ builder.InitializeApp();
 var configuration = builder.Configuration;
 var services = builder.Services;
 
-//configuration.AddConsulConfiguration();
+configuration.AddConsulConfiguration();
 
 services.AddCors(option =>
 {

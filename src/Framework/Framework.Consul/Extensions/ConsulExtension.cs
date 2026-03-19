@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Consul;
+using Framework.Core;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Consul
@@ -16,20 +18,20 @@ namespace Framework.Consul
         /// <param name="configuration">要扩展的配置生成器。用于注册 Consul 配置源，不能为 null。</param>
         public static void AddConsulConfiguration(this IConfigurationBuilder configuration)
         {
-            //var appName = App.AppName;
-            //var env = App.WebHostEnvironment.EnvironmentName;
-            //var consulConfig = App.GetConfig<ConsulConfig>(FrameworkConstant.CONSUL);
+            var appName = App.AppName;
+            var env = App.WebHostEnvironment.EnvironmentName;
+            var consulConfig = App.GetConfig<ConsulConfig>(FrameworkConstant.CONSUL);
 
-            //var consulClient = new ConsulClient(client =>
-            //{
-            //    var url = FrameworkConstant.HTTP + consulConfig.Host + DelimitersConstant.COLON + consulConfig.Port;
-            //    //Todo Consul身份验证 client.Token = "";
-            //    client.Address = new Uri(url);
-            //});
+            var consulClient = new ConsulClient(client =>
+            {
+                var url = FrameworkConstant.HTTP + consulConfig.Host + DelimitersConstant.COLON + consulConfig.Port;
+                //Todo Consul身份验证 client.Token = "";
+                client.Address = new Uri(url);
+            });
 
-            //var consulConfigSource = new ConsulConfigSource(consulClient, consulConfig.TimerCycle, appName, env);
+            var consulConfigSource = new ConsulConfigSource(consulClient, consulConfig.TimerCycle, appName, env);
 
-            //configuration.Add(consulConfigSource);
+            configuration.Add(consulConfigSource);
         }
 
         /// <summary>
