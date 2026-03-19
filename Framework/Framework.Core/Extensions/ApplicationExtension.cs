@@ -5,12 +5,12 @@ namespace Framework.Core
     public static class ApplicationExtension
     {
         /// <summary>
-        /// 初始化内部App对象
+        /// 从 WebApplicationBuilder 初始化内部 App 对象
         /// </summary>
         /// <param name="builder"></param>
-        public static void InitializeAsync(this WebApplicationBuilder builder)
+        public static void InitializeApp(this WebApplicationBuilder builder)
         {
-            InternalApp.InitInternalApp(builder);
+            InternalApp.InitializeFromBuilder(builder);
         }
 
         /// <summary>

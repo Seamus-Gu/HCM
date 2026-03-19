@@ -1,36 +1,40 @@
-﻿namespace Framework.Core
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+
+namespace Framework.Core
 {
     public static class App
     {
-        ///// <summary>
-        ///// 应用名
-        ///// </summary>
-        //public static string AppName = InternalApp._hostEnvironment!.ApplicationName;
+        /// <summary>
+        /// 应用名
+        /// </summary>
+        public static string AppName = InternalApp._hostEnvironment!.ApplicationName;
 
-        ///// <summary>
-        ///// 是否开发环境
-        ///// </summary>
-        //public static bool IsDevelop = InternalApp._hostEnvironment!.IsDevelopment();
+        /// <summary>
+        /// 是否开发环境
+        /// </summary>
+        public static bool IsDevelop = InternalApp._hostEnvironment!.IsDevelopment();
 
-        ///// <summary>
-        ///// 全局配置选项
-        ///// </summary>
-        //public static IConfiguration Configuration => InternalApp._configuration!;
+        /// <summary>
+        /// 全局配置选项
+        /// </summary>
+        public static IConfiguration Configuration => InternalApp._configuration!;
 
-        ///// <summary>
-        ///// 获取Web主机环境，如，是否是开发环境，生产环境等
-        ///// </summary>
-        //public static IWebHostEnvironment WebHostEnvironment => InternalApp._webHostEnvironment!;
+        /// <summary>
+        /// 获取Web主机环境，如，是否是开发环境，生产环境等
+        /// </summary>
+        public static IWebHostEnvironment WebHostEnvironment => InternalApp._webHostEnvironment!;
 
-        ///// <summary>
-        ///// 获取泛型主机环境，如，是否是开发环境，生产环境等
-        ///// </summary>
-        //public static IHostEnvironment HostEnvironment => InternalApp._hostEnvironment!;
+        /// <summary>
+        /// 获取泛型主机环境，如，是否是开发环境，生产环境等
+        /// </summary>
+        public static IHostEnvironment HostEnvironment => InternalApp._hostEnvironment!;
 
-        ///// <summary>
-        ///// 存储根服务，可能为空
-        ///// </summary>
-        //public static IServiceProvider RootServices => InternalApp._rootServices!;
+        /// <summary>
+        /// 存储根服务，可能为空
+        /// </summary>
+        public static IServiceProvider RootServices => InternalApp._rootServices!;
 
         ///// <summary>
         ///// 获取请求上下文
@@ -114,19 +118,25 @@
         //    return (serviceProvider ?? GetServiceProvider(type)).GetRequiredService(type);
         //}
 
-        ///// <summary>
-        ///// 获取配置
-        ///// </summary>
-        ///// <typeparam name="TOptions">强类型选项类</typeparam>
-        ///// <param name="path">配置中对应的Key</param>
-        ///// <param name="loadPostConfigure"></param>
-        ///// <returns>TOptions</returns>
-        //public static TConfig GetConfig<TConfig>(string path)
-        //{
-        //    var options = Configuration.GetSection(path).Get<TConfig>();
+        /// <summary>
+        /// 获取配置
+        /// </summary>
+        /// <typeparam name="TOptions">强类型选项类</typeparam>
+        /// <param name="path">配置中对应的Key</param>
+        /// <param name="loadPostConfigure"></param>
+        /// <returns>TOptions</returns>
+        public static TConfig GetConfig<TConfig>(string path)
+        {
+            var options = Configuration.GetSection(path).Get<TConfig>();
 
-        //    return options;
-        //}
+            if (options == null)
+            {
+                //Todo : 可以考虑抛出更具体的异常，提示配置项未找到或配置项类型不匹配等问题
+                throw new Exception("");
+            }
+
+            return options;
+        }
 
         ///// <summary>
         ///// 获取选项

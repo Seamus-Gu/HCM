@@ -1,4 +1,6 @@
-﻿using Framework.WebApi;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Framework.WebApi;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Extensions.Configuration;
@@ -18,9 +20,6 @@ namespace Framework.Platform
         /// <returns>配置完成的 WebApplicationBuilder 实例，可用于后续的应用程序构建和启动。</returns>
         public static WebApplicationBuilder AddPIHCMPlatform(this WebApplicationBuilder builder, Action<IServiceCollection, IConfiguration>? configureModules = null)
         {
-            var services = builder.Services;
-            var config = builder.Configuration;
-
             //builder.InitApp();
 
             //// 配置中心
@@ -38,12 +37,12 @@ namespace Framework.Platform
             //// 缓存注册
             //builder.Services.AddCache(opeions.UseRedis);
 
-            //// DI
-            //builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
-            //builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
-            //{
-            //    builder.InitAutofac();
-            //});
+            // DI
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+            builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+            {
+                builder.InitAutofac();
+            });
 
             //// Orm
             //builder.Services.AddSqlSugar(opeions.UseDatebase);

@@ -15,34 +15,37 @@ namespace Framework.Core
         /// <summary>
         /// 应用服务
         /// </summary>
-        internal static IServiceCollection? _internalServices;
+        internal static IServiceCollection _internalServices = default!;
 
         /// <summary>
         /// 根服务
         /// </summary>
-        internal static IServiceProvider? _rootServices;
+        internal static IServiceProvider _rootServices = default!;
 
         /// <summary>
         /// 配置对象
         /// </summary>
-        internal static IConfiguration? _configuration;
+        internal static IConfiguration _configuration = default!;
 
         /// <summary>
         /// 获取Web主机环境
         /// </summary>
-        internal static IWebHostEnvironment? _webHostEnvironment;
+        internal static IWebHostEnvironment _webHostEnvironment = default!;
 
         /// <summary>
         /// 获取泛型主机环境
         /// </summary>
-        internal static IHostEnvironment? _hostEnvironment;
+        internal static IHostEnvironment _hostEnvironment = default!;
 
         private InternalApp()
         {
         }
 
-
-        internal static void InitInternalApp(WebApplicationBuilder builder)
+        /// <summary>
+        /// 从 WebApplicationBuilder 初始化内部应用程序静态状态（配置、服务和环境）。
+        /// </summary>
+        /// <param name="builder">WebApplicationBuilder 实例。</param>
+        internal static void InitializeFromBuilder(WebApplicationBuilder builder)
         {
             _configuration = builder.Configuration;
             _internalServices = builder.Services;
@@ -50,9 +53,9 @@ namespace Framework.Core
         }
 
         /// <summary>
-        ///
+        /// 将应用的根服务引用保存到静态字段。
         /// </summary>
-        /// <param name="builder"></param>
+        /// <param name="app">应用程序构建器。</param>
         internal static void ConfigureInternalApp(IApplicationBuilder app)
         {
             _rootServices = app.ApplicationServices;
