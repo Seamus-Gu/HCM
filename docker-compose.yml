@@ -62,7 +62,14 @@ services:
        networks:
            - seed
 
+  pihcm.core:
+    image: ${DOCKER_REGISTRY-}pihcmcore
+    build:
+      context: .
+      dockerfile: Core/PIHCM.Core/Dockerfile
+
 networks:
     seed:
         name: seed
         driver: bridge
+

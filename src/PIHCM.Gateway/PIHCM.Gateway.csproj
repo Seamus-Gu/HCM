@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Framework.Consul\Framework.Consul.csproj" />
+    <ProjectReference Include="..\Framework\Framework.Consul\Framework.Consul.csproj" />
   </ItemGroup>
 
 </Project>

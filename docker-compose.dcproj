@@ -8,8 +8,6 @@
     <DockerLaunchAction>None</DockerLaunchAction>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="docker-compose.tools.yml" />
-    <None Include="docker-compose.develop.yml" />
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>
