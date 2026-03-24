@@ -1,7 +1,9 @@
-﻿namespace PIHCM.Gen.Interfances
+﻿using PIHCM.Gen.Dto;
+
+namespace PIHCM.Gen.Interfances
 {
     public interface IGenService
     {
-        public void ParseCreateTableSql(string createTableSql);
+        public void ParseCreateTableSql(SQLDto createTableSql);
     }
 }

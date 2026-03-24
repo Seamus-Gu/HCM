@@ -1,4 +1,6 @@
 ﻿
+using PIHCM.Gen.Dto;
+
 namespace PIHCM.Gen.Controllers
 {
     /// <summary>
@@ -18,7 +20,7 @@ namespace PIHCM.Gen.Controllers
         }
 
         [HttpPost("generate-data")]
-        public IActionResult GenerateTableAndColumns([FromBody] string sql)
+        public IActionResult GenerateTableAndColumns([FromBody] SQLDto sql)
         {
             _genService.ParseCreateTableSql(sql);
 

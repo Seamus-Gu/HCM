@@ -1,38 +1,39 @@
-﻿using System.Text;
+﻿using PIHCM.Gen.Dto;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace PIHCM.Gen.Services
 {
     public class GenService : IGenService, IScopeService
     {
-        public void ParseCreateTableSql(string createTableSql)
+        public void ParseCreateTableSql(SQLDto createTableSql)
         {
-            if (createTableSql.IsNullOrEmpty())
-            {
-                return;
-            }
+            //if (createTableSql.IsNullOrEmpty())
+            //{
+            //    return;
+            //}
 
-            var tableName = ParseTableName(createTableSql);
+            var tableName = ParseTableName(createTableSql.SqlStr);
 
             if (string.IsNullOrWhiteSpace(tableName))
             {
                 throw new ArgumentException("无法从 SQL 中解析表名。", nameof(createTableSql));
             }
 
-            var tableDescription = ParseTableComment(createTableSql);
-            var tableBody = ParseTableBody(createTableSql);
-            var definitions = SplitDefinitions(tableBody);
+            //var tableDescription = ParseTableComment(createTableSql);
+            //var tableBody = ParseTableBody(createTableSql);
+            //var definitions = SplitDefinitions(tableBody);
 
-            var primaryKeys = ParsePrimaryKeys(definitions);
-            var columns = ParseColumns(definitions, primaryKeys);
+            //var primaryKeys = ParsePrimaryKeys(definitions);
+            //var columns = ParseColumns(definitions, primaryKeys);
 
-            var table = new GenTable
-            {
-                Name = tableName,
-                EntityName = NamingUtil.SnakeCaseToCamelCase(tableName),
-                Description = tableDescription,
-                Columns = columns
-            };
+            //var table = new GenTable
+            //{
+            //    Name = tableName,
+            //    EntityName = NamingUtil.SnakeCaseToCamelCase(tableName),
+            //    Description = tableDescription,
+            //    Columns = columns
+            //};
         }
 
         private static string ParseTableName(string sql)

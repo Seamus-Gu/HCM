@@ -48,7 +48,7 @@ namespace Framework.Consul
 
             service.AddSingleton<IConsulClient>(sp =>
             {
-                var url = FrameworkConstant.HTTP + consulConfig.Host + DelimitersConstant.COLON + consulConfig.Port;
+                var url = $"{FrameworkConstant.HTTP}{consulConfig.Host}{DelimitersConstant.COLON}{consulConfig.Port}";
 
                 return new ConsulClient(client =>
                 {

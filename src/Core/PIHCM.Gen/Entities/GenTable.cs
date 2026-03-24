@@ -2,8 +2,6 @@
 {
     public class GenTable
     {
-
-
         /// <summary>
         /// 数据库表名
         /// </summary>

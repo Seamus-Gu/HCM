@@ -8,8 +8,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.Core\Framework.Core.csproj" />
+    <ProjectReference Include="..\Framework.Grpc\Framework.Grpc.csproj" />
     <ProjectReference Include="..\Framework.IdGenerater\Framework.IdGenerater.csproj" />
-    <ProjectReference Include="..\Framework.SqlSugar\Framework.SqlSugar.csproj" />
+    <ProjectReference Include="..\Framework.Logger\Framework.Logger.csproj" />
+    <ProjectReference Include="..\Framework.Orm\Framework.Orm.csproj" />
   </ItemGroup>
 
 </Project>

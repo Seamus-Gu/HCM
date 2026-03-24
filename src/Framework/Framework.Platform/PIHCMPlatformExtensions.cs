@@ -4,6 +4,7 @@ using Framework.Consul;
 using Framework.Core;
 using Framework.DI;
 using Framework.Logger;
+using Framework.Orm;
 using Framework.WebApi;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
@@ -50,15 +51,15 @@ namespace Framework.Platform
                 containerBuilder.InitAutofac();
             });
 
-            //// Orm
-            //builder.Services.AddSqlSugar(opeions.UseDatebase);
+            // Orm
+            builder.Services.AddSqlSugar();
 
             builder.Services
                 .AddControllers(options =>
                 {
                     options.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
                     //options.Filters.Add(new GlobalActionFilter());
-                    //options.Filters.Add(new GlobalExceptionFilter());
+                    options.Filters.Add(new GlobalExceptionFilter());
                 })
                 .AddJsonOptions(options =>
                 {
