@@ -1,7 +1,7 @@
 ﻿
 namespace PIHCM.Gen.Entities
 {
-    public class GenTable
+    public class GenTable : BaseEntity
     {
         /// <summary>
         /// 所属命名空间

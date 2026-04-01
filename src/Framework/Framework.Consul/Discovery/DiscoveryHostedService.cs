@@ -11,7 +11,7 @@ namespace Framework.Consul
 
         public DiscoveryHostedService()
         {
-            _consulConfig = App.GetConfig<ConsulConfig>(FrameworkConstant.CONSUL);
+            _consulConfig = App.GetConfig<ConsulConfig>(ConsulConstant.CONSUL);
 
             _consulClient = new ConsulClient(config =>
             {

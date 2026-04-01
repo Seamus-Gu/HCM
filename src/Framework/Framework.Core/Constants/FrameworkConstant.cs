@@ -16,46 +16,19 @@
         public const string SERVICE = "Service";
         #endregion
 
-        #region Consul
-        public const string CONSUL = "Consul";
-        #endregion
-
-        #region 常用协议
+        #region 协议
         public const string HTTP = "http://";
         public const string HTTPS = "https://";
         #endregion
 
-        #region Log (日志配置)
-        public const string LOG_CONFIG = "Logging";
-        public const string LOGGING_FILE_PATH = "logs/log-.log";
-        public const string LOG_OUT_PUT = "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff}] {Level} {Properties:j} {Message} {NewLine} {Exception}";
-        #endregion
-
-        #region Localization (本地化)
+        #region 国际化
         public const string LOCALIZATION_PATH = "Resources";
         public const string LANGUAGE = "Lang";
         public const string LANGUAGE_CHINESE = "zh-CN";
         public const string LANGUAGE_ENGLISH = "en-US";
         #endregion
 
-        #region Swagger (API 文档)
-        public const string SWAGGER = "Swagger";
-        public const string SWAGGER_JSON = "swagger/v1/swagger.json";
-        public const string SWAGGER_HEADER = "Is-Swagger";
-        #endregion
-
-        #region Configurations (数据库/缓存/安全/存储/邮件/任务)
-        public const string DB_CONFIG = "Datebase";
-        public const string REDIS = "Redis";
-        public const string LOCALIZATION = "Localization";
-        public const string SECURITY_CONFIG = "Security";
-        public const string MINIO = "Minio";
-        public const string EMAIL = "Email";
-        public const string JOB = "Job";
-        public const string SECURITY = "Security";
-        #endregion
-
-        #region Routing & UI (路由/布局/管理员)
+        #region 路由&UI (路由/布局/管理员)
         public const string HEALTH_ROUTE = "/health";
         public const string ADMIN = "admin";
         public const string ADMIN_PERMISSION = "*:*:*";
@@ -63,7 +36,7 @@
         public const string PARENT_VIEW = "ParentView";
         #endregion
 
-        #region Result
+        #region HTTP 方法 & 操作结果
         public const string ADD = "Add";
         public const string EDIT = "Edit";
         public const string REMOVE = "Remove";
@@ -74,5 +47,21 @@
         public const string PUT = "PUT";
         public const string DELETE = "DELETE";
         #endregion Result
+
+
+        #region Swagger (API 文档)
+        public const string OPENAPI_PATH = "openapi/v1.json";
+        public const string SWAGGER_HEADER = "Is-Swagger";
+        #endregion
+
+        #region Configurations (数据库/缓存/安全/存储/邮件/任务)
+        //public const string REDIS = "Redis";
+        //public const string EMAIL = "Email";
+        //public const string JOB = "Job";
+        public const string SECURITY = "Security";
+        #endregion
+
+
+
     }
 }

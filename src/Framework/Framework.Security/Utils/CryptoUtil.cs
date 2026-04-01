@@ -19,10 +19,10 @@ namespace Framework.Security
         {
             string salt = "seed_567890Omnbvc_Salt";
             string str = input + salt;
-            using (MD5 md5 = System.Security.Cryptography.MD5.Create())
+            using (SHA256 sha256 = SHA256.Create())
             {
                 byte[] inputBytes = Encoding.UTF8.GetBytes(str);
-                byte[] hashBytes = md5.ComputeHash(inputBytes);
+                byte[] hashBytes = sha256.ComputeHash(inputBytes);
 
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < hashBytes.Length; i++)

@@ -1,5 +1,4 @@
-﻿using Framework.Core;
-using Serilog;
+﻿using Serilog;
 
 namespace Framework.Logger
 {
@@ -20,7 +19,7 @@ namespace Framework.Logger
         /// <summary>
         /// 文件目录
         /// </summary>
-        public string FilePath { get; set; } = FrameworkConstant.LOGGING_FILE_PATH;
+        public string FilePath { get; set; } = LogConstant.LOGGING_FILE_PATH;
 
         /// <summary>
         /// 文件类别(分支,小时,天)
@@ -30,7 +29,7 @@ namespace Framework.Logger
         /// <summary>
         /// 输出模板
         /// </summary>
-        public string OutPutTemplate { get; set; } = FrameworkConstant.LOG_OUT_PUT;
+        public string OutPutTemplate { get; set; } = LogConstant.LOG_OUT_PUT;
 
         /// <summary>
         /// 控制最大创建的日志文件数量

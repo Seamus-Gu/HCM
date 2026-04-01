@@ -2,13 +2,18 @@ using PIHCM.Gen.Repositories;
 
 namespace PIHCM.Gen.Services
 {
-    public class GenTableService
+    public class GenTableService : IGenTableService, IScopeService
     {
         private readonly GenTableRepository _repository;
 
         public GenTableService(GenTableRepository repository)
         {
             _repository = repository;
+        }
+
+        public async Task<List<GenTable>> GetList()
+        {
+            return await _repository.GetListAsync();
         }
 
         public void GenerateCode(string tableName, string outputPath)

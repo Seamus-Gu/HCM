@@ -8,7 +8,7 @@ namespace Framework.Logger
     {
         public static ILogger CreateLogger()
         {
-            var logConfig = App.GetConfig<LogConfig>(FrameworkConstant.LOG_CONFIG);
+            var logConfig = App.GetConfig<LogConfig>(LogConstant.LOG_CONFIG);
             var loggerConfiguration = InitLoggerConfiguration();
 
             if (logConfig.File != null && logConfig.File.Enabled)

@@ -18,8 +18,8 @@ namespace Framework.WebApi
         /// </summary>
         public BaseEntity()
         {
-            Id = YitIdHelper.NextId();
-            CreateTime = DateTime.Now;
+            this.Id = YitIdHelper.NextId();
+            this.CreatedAt = DateTime.Now;
         }
 
         /// <summary>
@@ -31,21 +31,21 @@ namespace Framework.WebApi
         /// <summary>
         /// Gets or sets the date and time when the entity was created.
         /// </summary>
-        public virtual DateTime CreateTime { get; set; }
+        public virtual DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or sets the identifier of the user who created the entity.
         /// </summary>
-        public virtual string CreateBy { get; set; } = string.Empty;
+        public virtual string CreatedBy { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the date and time when the entity was last updated.
         /// </summary>
-        public virtual DateTime? UpdateTime { get; set; }
+        public virtual DateTime? UpdatedAt { get; set; }
 
         /// <summary>
         /// Gets or sets the identifier of the user who last updated the entity.
         /// </summary>
-        public virtual string? UpdateBy { get; set; }
+        public virtual string? UpdatedBy { get; set; }
     }
 }

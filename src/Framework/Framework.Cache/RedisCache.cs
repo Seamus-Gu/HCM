@@ -1,5 +1,4 @@
-﻿using Framework.Core;
-using StackExchange.Redis;
+﻿using StackExchange.Redis;
 
 namespace Framework.Cache
 {
@@ -13,15 +12,15 @@ namespace Framework.Cache
 
         static RedisCache()
         {
-            var redisConfig = App.GetConfig<RedisConfig>(FrameworkConstant.REDIS);
+            //var redisConfig = App.GetConfig<RedisConfig>(FrameworkConstant.REDIS);
 
-            var redisConnectionStr = $"{redisConfig.Host}:{redisConfig.Port}";
-            var options = ConfigurationOptions.Parse(redisConnectionStr);
-            options.Password = redisConfig.Password;
+            //var redisConnectionStr = $"{redisConfig.Host}:{redisConfig.Port}";
+            //var options = ConfigurationOptions.Parse(redisConnectionStr);
+            //options.Password = redisConfig.Password;
 
-            var connectionMultiplexer = GetConnectRedisMultiplexer(options);
+            //var connectionMultiplexer = GetConnectRedisMultiplexer(options);
 
-            DB = connectionMultiplexer.GetDatabase();
+            //DB = connectionMultiplexer.GetDatabase();
         }
 
         private static IConnectionMultiplexer GetConnectRedisMultiplexer(ConfigurationOptions options)

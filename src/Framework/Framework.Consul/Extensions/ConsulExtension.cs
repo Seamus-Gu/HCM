@@ -21,7 +21,7 @@ namespace Framework.Consul
             var appName = App.AppName;
             var envName = App.WebHostEnvironment.EnvironmentName;
 
-            var consulConfig = App.GetConfig<ConsulConfig>(FrameworkConstant.CONSUL);
+            var consulConfig = App.GetConfig<ConsulConfig>(ConsulConstant.CONSUL);
 
             var consulClient = new ConsulClient(client =>
             {
@@ -44,7 +44,7 @@ namespace Framework.Consul
         /// <param name="service">要向其添加 Consul 客户端服务的 IServiceCollection 实例。不能为空。</param>
         public static void AddConsulClient(this IServiceCollection service)
         {
-            var consulConfig = App.GetConfig<ConsulConfig>(FrameworkConstant.CONSUL);
+            var consulConfig = App.GetConfig<ConsulConfig>(ConsulConstant.CONSUL);
 
             service.AddSingleton<IConsulClient>(sp =>
             {

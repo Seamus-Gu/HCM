@@ -9,7 +9,7 @@ namespace Framework.Orm
     {
         public static void AddSqlSugar(this IServiceCollection services)
         {
-            var dbConfig = App.GetConfig<DBConfig>(FrameworkConstant.DB_CONFIG);
+            var dbConfig = App.GetConfig<DBConfig>(OrmConstant.DB_CONFIG);
 
             dbConfig.ConnectionConfigs.ForEach(SetDbConfig);
 

@@ -31,7 +31,7 @@ services.AddLocalization();
 
 services.PostConfigure<FileConfiguration>(options =>
 {
-    var consulConfig = App.GetConfig<ConsulConfig>(FrameworkConstant.CONSUL);
+    var consulConfig = App.GetConfig<ConsulConfig>(ConsulConstant.CONSUL);
 
     options.GlobalConfiguration.ServiceDiscoveryProvider.Host = consulConfig.Host;
     options.GlobalConfiguration.ServiceDiscoveryProvider.Port = consulConfig.Port;
@@ -64,7 +64,7 @@ if (app.Environment.IsDevelopment())
         {
             var index = route.UpstreamPathTemplate.IndexOf(DelimitersConstant.LEFT_BRACE);
             var prefix = route.UpstreamPathTemplate.Substring(0, index);
-            options.SwaggerEndpoint(prefix + FrameworkConstant.SWAGGER_JSON, route.ServiceName);
+            options.SwaggerEndpoint(prefix + FrameworkConstant.OPENAPI_PATH, route.ServiceName);
             options.UseRequestInterceptor($"(req) => {{ req.headers['{FrameworkConstant.SWAGGER_HEADER}'] = true; return req; }} ");
         }
     });

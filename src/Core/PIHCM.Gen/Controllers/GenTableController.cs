@@ -1,5 +1,4 @@
-﻿
-namespace PIHCM.Gen.Controllers
+﻿namespace PIHCM.Gen.Controllers
 {
     /// <summary>
     /// 提供用于处理代码生成表相关操作的 API 控制器。
@@ -10,10 +9,19 @@ namespace PIHCM.Gen.Controllers
     [Route("v1/[controller]")]
     public class GenTableController : BaseController
     {
-        [HttpGet("list")]
-        public IActionResult Test()
+        private readonly IGenTableService _genTableService;
+
+        public GenTableController(IGenTableService genTableService)
         {
-            return Success();
+            _genTableService = genTableService;
+        }
+
+        [HttpGet("list")]
+        public async Task<IActionResult> Test()
+        {
+            var res = await _genTableService.GetList();
+
+            return Success(res);
         }
     }
 }
