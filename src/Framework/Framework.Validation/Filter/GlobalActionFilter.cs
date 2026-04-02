@@ -61,7 +61,7 @@ namespace Framework.Validation
         {
             var errorEnum = ResolveErrorCode(field, candidates, errorCodeCache);
             var localizedMessage = errorEnum is { } code
-                ? ValidationMessages.GetString(code.GetName())
+                ? ValidationResource.GetString(code.GetName())
                 : message;
             var finalMessage = FormatMessage(localizedMessage, field, message);
 

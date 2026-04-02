@@ -1,11 +1,11 @@
-﻿using PIHCM.Gen.Dto;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿
 
 namespace PIHCM.Gen.Services
 {
-    public class GenService : IGenService, IScopeService
+    public class SQLService : ISQLService, IScopeService
     {
+        private readonly GenTableRepository _genTableRepository;
+
         private static readonly Regex _tableNameRegex = new(
             SQLConstant.TABLE_NAME_REGEX,
             RegexOptions.IgnoreCase | RegexOptions.Compiled);
@@ -42,7 +42,12 @@ namespace PIHCM.Gen.Services
             SQLConstant.CONSTRAINT_DEFINITION_REGEX,
             RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-        public void ParseCreateTableSql(SQLDto sqlDto)
+        public SQLService(GenTableRepository genTableRepository)
+        {
+            _genTableRepository = genTableRepository;
+        }
+
+        public async Task<bool> ParseCreateTableSql(SQLDto sqlDto)
         {
             var sql = sqlDto.SqlStr;
             var tableName = ParseTableName(sql);
@@ -61,11 +66,14 @@ namespace PIHCM.Gen.Services
 
             var table = new GenTable
             {
+                NameSpace = $"{FrameworkConstant.FRAMEWORK_PREFIX}{DelimitersConstant.DOT}{App.AppName}",
                 TableName = tableName,
                 EntityName = NamingUtil.SnakeCaseToCamelCase(tableName),
                 Description = tableDescription,
                 Columns = columns
             };
+
+            return await _genTableRepository.InsertAsync(table);
         }
 
         private static string ParseTableName(string sql)
@@ -221,22 +229,8 @@ namespace PIHCM.Gen.Services
 
         private static SqlTypeEnum HandleSqlType(string type)
         {
-            var normalizedType = NormalizeSqlType(type);
-            return SqlTypeEnumHelper.TryParse(normalizedType, out var sqlType)
-                ? sqlType
-                : SqlTypeEnum.Varchar;
-        }
-
-        private static string NormalizeSqlType(string type)
-        {
-            if (string.IsNullOrWhiteSpace(type))
-            {
-                return string.Empty;
-            }
-
-            var span = type.AsSpan().Trim();
-            var separatorIndex = span.IndexOfAny(DelimitersConstant.LEFT_PARENTHESIS[0], DelimitersConstant.SPACE[0]);
-            return (separatorIndex >= 0 ? span[..separatorIndex] : span).ToString();
+            var enumDic = typeof(SqlTypeEnum).GetDescriptionAndEnum<SqlTypeEnum>();
+            return enumDic.TryGetValue(type, out var sqlType) ? sqlType : SqlTypeEnum.Varchar;
         }
 
         private static bool IsConstraintDefinition(string definition)

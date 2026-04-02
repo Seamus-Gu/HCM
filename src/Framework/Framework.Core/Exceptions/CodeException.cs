@@ -18,7 +18,7 @@
         /// <param name="message"></param>
         public CodeException(int code, string? message) : base(message)
         {
-            Code = code;
+            this.Code = code;
         }
     }
 }

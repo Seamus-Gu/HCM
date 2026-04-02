@@ -1,11 +1,10 @@
-﻿using Framework.Core;
-using System.Resources;
+﻿using System.Resources;
 
 namespace Framework.Validation
 {
-    internal class ValidationMessages
+    internal class ValidationResource
     {
-        private static readonly ResourceManager _resourceManager = new ResourceManager(typeof(ValidationMessages));
+        private static readonly ResourceManager _resourceManager = new ResourceManager(typeof(ValidationResource));
 
         public static string Required => GetString(ValidationErrorEnum.Required.GetName())!;
 

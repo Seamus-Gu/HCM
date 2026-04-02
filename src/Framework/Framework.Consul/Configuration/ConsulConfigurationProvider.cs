@@ -57,7 +57,7 @@ namespace Framework.Consul
             var commonName = _envName + DelimitersConstant.SLASH + FrameworkConstant.COMMON;
 
             var list = queryRes.Response.Where(t => t.Key == currentName || t.Key == commonName).ToList();
-            Data = list.SelectMany(t => t.ToConfigDic()).ToDictionary(t => t.Key, t => t.Value);
+            this.Data = list.SelectMany(t => t.ToConfigDic()).ToDictionary(t => t.Key, t => t.Value);
 
             SetLastIndex(queryRes.LastIndex);
         }
@@ -97,7 +97,7 @@ namespace Framework.Consul
                     var commonName = _envName + DelimitersConstant.SLASH + FrameworkConstant.FRAMEWORK_PREFIX;
 
                     var list = result.Response.Where(t => t.Key == commonName || t.Key == currentName).ToList();
-                    Data = list.SelectMany(t => t.ToConfigDic()).ToDictionary(t => t.Key, t => t.Value);
+                    this.Data = list.SelectMany(t => t.ToConfigDic()).ToDictionary(t => t.Key, t => t.Value);
 
                     OnReload();
                 }

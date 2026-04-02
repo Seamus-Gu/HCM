@@ -1,7 +1,4 @@
 ﻿using System.Collections.Frozen;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 
 namespace PIHCM.Gen.Enums
 {
@@ -112,6 +109,8 @@ namespace PIHCM.Gen.Enums
 
         public static bool TryParse(string sqlType, out SqlTypeEnum sqlTypeEnum)
         {
+            var a = typeof(SqlTypeEnum).GetDescriptionAndEnum<SqlTypeEnum>();
+
             sqlTypeEnum = default;
             return !string.IsNullOrWhiteSpace(sqlType) && _sqlTypeMappings.TryGetValue(sqlType, out sqlTypeEnum);
         }

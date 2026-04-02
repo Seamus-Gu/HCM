@@ -8,9 +8,9 @@ namespace Framework.WebApi
     {
         private static readonly Dictionary<string, string> _actionMap = new()
         {
-            { FrameworkConstant.POST,   FrameworkConstant.ADD },
-            { FrameworkConstant.PUT,   FrameworkConstant.EDIT },
-            { FrameworkConstant.DELETE,   FrameworkConstant.REMOVE },
+            { HttpConstant.POST,   FrameworkConstant.ADD },
+            { HttpConstant.PUT,   FrameworkConstant.EDIT },
+            { HttpConstant.DELETE,   FrameworkConstant.REMOVE },
         };
 
         /// <summary>

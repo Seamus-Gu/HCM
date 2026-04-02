@@ -1,10 +1,10 @@
-﻿using System.ComponentModel;
-using System.Text.Encodings.Web;
+﻿using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Framework.Core
 {
+    //Todo Json序列化和反序列化
     public class JsonUtil
     {
         public static T? Deseriallize<T>(string body) where T : class

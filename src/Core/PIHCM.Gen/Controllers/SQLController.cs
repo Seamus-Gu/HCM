@@ -1,7 +1,4 @@
-﻿
-using PIHCM.Gen.Dto;
-
-namespace PIHCM.Gen.Controllers
+﻿namespace PIHCM.Gen.Controllers
 {
     /// <summary>
     /// 提供用于处理代码生成表相关操作的 API 控制器。
@@ -12,19 +9,19 @@ namespace PIHCM.Gen.Controllers
     [Route("v1/[controller]")]
     public class SQLController : BaseController
     {
-        private readonly IGenService _genService;
+        private readonly ISQLService _sqlService;
 
-        public SQLController(IGenService genService)
+        public SQLController(ISQLService genService)
         {
-            _genService = genService;
+            _sqlService = genService;
         }
 
         [HttpPost("generate-data")]
-        public IActionResult GenerateTableAndColumns([FromBody] SQLDto sql)
+        public async Task<IActionResult> GenerateTableAndColumns([FromBody] SQLDto sql)
         {
-            _genService.ParseCreateTableSql(sql);
+            var result = await _sqlService.ParseCreateTableSql(sql);
 
-            return Success();
+            return BoolResult(result);
         }
     }
 }

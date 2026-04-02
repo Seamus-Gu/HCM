@@ -36,16 +36,12 @@
         public const string PARENT_VIEW = "ParentView";
         #endregion
 
-        #region HTTP 方法 & 操作结果
+        #region 操作结果
         public const string ADD = "Add";
         public const string EDIT = "Edit";
         public const string REMOVE = "Remove";
         public const string SUCCESS = "Success";
         public const string FAIL = "FAil";
-        public const string GET = "GET";
-        public const string POST = "POST";
-        public const string PUT = "PUT";
-        public const string DELETE = "DELETE";
         #endregion Result
 
 

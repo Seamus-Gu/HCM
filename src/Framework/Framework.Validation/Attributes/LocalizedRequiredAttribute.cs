@@ -8,13 +8,13 @@ namespace Framework.Validation
 
         public LocalizedRequiredAttribute()
         {
-            this.ErrorMessageResourceType = typeof(ValidationMessages);
-            this.ErrorMessageResourceName = nameof(ValidationMessages.Required);
+            this.ErrorMessageResourceType = typeof(ValidationResource);
+            this.ErrorMessageResourceName = nameof(ValidationResource.Required);
         }
 
         public LocalizedRequiredAttribute(string resourceName)
         {
-            this.ErrorMessageResourceType = typeof(ValidationMessages);
+            this.ErrorMessageResourceType = typeof(ValidationResource);
             this.ErrorMessageResourceName = resourceName;
         }
     }
