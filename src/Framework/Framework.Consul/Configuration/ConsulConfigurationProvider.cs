@@ -77,7 +77,7 @@ namespace Framework.Consul
                 return result;
             }
 
-            var message = string.Format(CommonLocalization.NotLoadConsul, result.StatusCode);
+            var message = string.Format(FrameworkResource.NotLoadConsul, result.StatusCode);
 
             throw new CodeException(ErrorEnum.NotLoadConsul.ToInt(), message);
         }

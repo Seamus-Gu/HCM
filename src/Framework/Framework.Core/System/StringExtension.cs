@@ -12,21 +12,6 @@ namespace System
     public static class StringExtension
     {
         /// <summary>
-        /// 判断字符串是否为 Null 或空字符串
-        /// </summary>
-        /// <param name="this"> 当前字符串 </param>
-        /// <returns>如果字符串为 Null 或空字符串,则返回 true;否则返回 false.</returns>
-        public static bool IsNullOrEmpty(this string? @this) => string.IsNullOrEmpty(@this);
-
-        /// <summary>
-        /// 判断字符串是否为 Null 或白字符串
-        /// </summary>
-        /// <param name="this"> 当前字符串 </param>
-        /// <returns>如果字符串为 Null 或由空白字符组成,则返回 true;否则返回 false.</returns>
-        /// <remarks>例如"  "此时返回True</remarks>
-        public static bool IsNullOrWhiteSpace(this string? @this) => string.IsNullOrWhiteSpace(@this);
-
-        /// <summary>
         /// 判断字符串是否符合指定模式
         /// </summary>
         /// <param name="this"> 当前字符串 </param>
@@ -114,9 +99,13 @@ namespace System
             bool status = int.TryParse(@this, out int result);
 
             if (status)
+            {
                 return result;
+            }
             else
+            {
                 return null;
+            }
         }
 
         /// <summary>
@@ -129,9 +118,13 @@ namespace System
             bool status = long.TryParse(@this, out long result);
 
             if (status)
+            {
                 return result;
+            }
             else
+            {
                 return null;
+            }
         }
 
         /// <summary>

@@ -2,6 +2,6 @@
 {
     public interface IGenTableService
     {
-        public Task<List<GenTable>> GetList();
+        public Task<List<GenTable>> GetPageList(GenTableQueryDto query);
     }
 }

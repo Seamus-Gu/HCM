@@ -41,7 +41,7 @@
         public const string EDIT = "Edit";
         public const string REMOVE = "Remove";
         public const string SUCCESS = "Success";
-        public const string FAIL = "FAil";
+        public const string FAILED = "Failed";
         #endregion Result
 
 

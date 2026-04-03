@@ -8,11 +8,15 @@
     /// </remarks>
     public enum ErrorEnum
     {
+        #region 启动项
+
         /// <summary>
         /// 表示未加载 Consul 的状态代码。
         /// </summary>
         /// <remarks>可用于指示系统在初始化或运行过程中未检测到 Consul 服务的情形。通常用于错误处理或状态判断。</remarks>
-        NotLoadConsul = 000002,
+        NotLoadConsul = 10000001,
+
+        #endregion
 
         /// <summary>
         /// 表示未登录用户的状态代码。

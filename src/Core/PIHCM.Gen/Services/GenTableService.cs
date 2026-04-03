@@ -1,5 +1,3 @@
-using PIHCM.Gen.Repositories;
-
 namespace PIHCM.Gen.Services
 {
     public class GenTableService : IGenTableService, IScopeService
@@ -11,9 +9,9 @@ namespace PIHCM.Gen.Services
             _repository = repository;
         }
 
-        public async Task<List<GenTable>> GetList()
+        public async Task<List<GenTable>> GetPageList(GenTableQueryDto query)
         {
-            return await _repository.GetListAsync();
+            return await _repository.SelectPageList(query);
         }
 
         public void GenerateCode(string tableName, string outputPath)

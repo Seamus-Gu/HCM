@@ -17,7 +17,7 @@
         }
 
         [HttpPost("generate-data")]
-        public async Task<IActionResult> GenerateTableAndColumns([FromBody] SQLDto sql)
+        public async Task<IActionResult> GenerateTableAndColumns([FromBody] SQLGenerateDto sql)
         {
             var result = await _sqlService.ParseCreateTableSql(sql);
 

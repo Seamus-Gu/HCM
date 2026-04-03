@@ -1,6 +1,24 @@
-﻿namespace Framework.Core.Resources
+﻿using System.Resources;
+
+namespace Framework.Core
 {
-    internal class FrameworkResource
+    public class FrameworkResource
     {
+        private static readonly ResourceManager _resourceManager = new ResourceManager(typeof(FrameworkResource));
+
+        /// <summary>
+        /// 无法加载Consul配置
+        /// </summary>
+        public static string NotLoadConsul => GetString(ErrorEnum.NotLoadConsul.GetName());
+
+        /// <summary>
+        /// 获取对应的I18N消息
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static string GetString(string name)
+        {
+            return _resourceManager.GetString(name) ?? name;
+        }
     }
 }

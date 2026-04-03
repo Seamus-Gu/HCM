@@ -2,6 +2,6 @@
 {
     public interface ISQLService
     {
-        public Task<bool> ParseCreateTableSql(SQLDto createTableSql);
+        public Task<bool> ParseCreateTableSql(SQLGenerateDto createTableSql);
     }
 }

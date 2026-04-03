@@ -8,6 +8,13 @@ namespace PIHCM.Gen.Repositories
         {
         }
 
+        public async Task<List<GenTable>> SelectPageList(GenTableQueryDto filter)
+        {
+            var q = AsQueryable();
+
+            return await PaginationListAsync(q, filter);
+        }
+
         //    public List<string> GetTables()
         //    {
         //        using (var connection = new SqlConnection(_connectionString))

@@ -47,7 +47,7 @@ namespace PIHCM.Gen.Services
             _genTableRepository = genTableRepository;
         }
 
-        public async Task<bool> ParseCreateTableSql(SQLDto sqlDto)
+        public async Task<bool> ParseCreateTableSql(SQLGenerateDto sqlDto)
         {
             var sql = sqlDto.SqlStr;
             var tableName = ParseTableName(sql);
@@ -66,7 +66,7 @@ namespace PIHCM.Gen.Services
 
             var table = new GenTable
             {
-                NameSpace = $"{FrameworkConstant.FRAMEWORK_PREFIX}{DelimitersConstant.DOT}{App.AppName}",
+                NameSpace = App.AppName,
                 TableName = tableName,
                 EntityName = NamingUtil.SnakeCaseToCamelCase(tableName),
                 Description = tableDescription,

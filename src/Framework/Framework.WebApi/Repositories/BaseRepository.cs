@@ -45,35 +45,97 @@ namespace Framework.WebApi
             iTenant = context.AsTenant();
         }
 
-        protected List<TEntity> PaginationList(ISugarQueryable<TEntity> queryable, Pagination pagination)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="queryable"></param>
+        /// <param name="pagination"></param>
+        /// <param name="mainTableAlias"> LeftJoin 场景传主表别名，如 "a"</param>
+        /// <returns></returns>
+        protected List<TEntity> PaginationList(
+            ISugarQueryable<TEntity> queryable,
+            Pagination pagination,
+            string? mainTableAlias = null)
         {
             int pageTotal = 0;
 
-            //if (!pagination.Sort.IsNullOrEmpty())
-            //{
-            //    var orderType = OrderByType.Asc;
+            var sortField = BuildSortField(pagination.Sort, mainTableAlias);
+            if (!string.IsNullOrEmpty(sortField))
+            {
+                var orderType = ParseOrderType(pagination.Order);
 
-            //    if (pagination.Order == "ascending")
-            //    {
-            //        orderType = OrderByType.Asc;
-            //    }
-            //    else if (pagination.Order == "descending")
-            //    {
-            //        orderType = OrderByType.Desc;
-            //    }
-
-            //    List<OrderByModel> orderList = OrderByModel.Create(
-            //        new OrderByModel() { FieldName = UtilMethods.ToUnderLine(pagination.Sort), OrderByType = orderType }
-            //    );
-
-            //    queryable.OrderBy(orderList);
-            //}
+                queryable.OrderBy(OrderByModel.Create(new OrderByModel
+                {
+                    FieldName = sortField!,
+                    OrderByType = orderType
+                }));
+            }
 
             var result = queryable.ToPageList(pagination.PageNum, pagination.PageSize, ref pageTotal);
-
             pagination.Total = pageTotal;
 
             return result.ToList();
+        }
+
+        protected async Task<List<TEntity>> PaginationListAsync(
+            ISugarQueryable<TEntity> queryable,
+            Pagination pagination,
+            string? mainTableAlias = null)
+        {
+            RefAsync<int> pageTotal = 0;
+
+            var sortField = BuildSortField(pagination.Sort, mainTableAlias);
+
+            if (!string.IsNullOrEmpty(sortField))
+            {
+                var orderType = ParseOrderType(pagination.Order);
+
+                queryable.OrderBy(OrderByModel.Create(new OrderByModel
+                {
+                    FieldName = sortField!,
+                    OrderByType = orderType
+                }));
+            }
+
+            var result = await queryable.ToPageListAsync(pagination.PageNum, pagination.PageSize, pageTotal);
+            pagination.Total = pageTotal;
+
+            return result.ToList();
+        }
+
+
+        private static OrderByType ParseOrderType(string? order)
+        {
+            return order?.ToLowerInvariant() switch
+            {
+                "desc" or "descending" => OrderByType.Desc,
+                _ => OrderByType.Asc
+            };
+        }
+
+        private static string? BuildSortField(string? sort, string? mainTableAlias)
+        {
+            if (string.IsNullOrEmpty(sort))
+            {
+                return null;
+            }
+
+            // 仅允许实体属性参与排序，避免拼接非法字段
+            var prop = typeof(TEntity).GetProperty(
+                sort,
+                System.Reflection.BindingFlags.Public |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.IgnoreCase);
+
+            if (prop == null)
+            {
+                return null;
+            }
+
+            var dbColumn = UtilMethods.ToUnderLine(prop.Name);
+
+            // LeftJoin 时强制使用主表别名，避免同名字段排序歧义
+            return string.IsNullOrEmpty(mainTableAlias) ? dbColumn : $"{mainTableAlias}.{dbColumn}";
         }
 
         //protected List<TEntity> PaginationList<T>(ISugarQueryable<TEntity> queryable, T queryDto) where T : Pagination
@@ -111,7 +173,7 @@ namespace Framework.WebApi
         //{
         //    RefAsync<int> pageTotal = 0;
 
-        //    if (!queryDto.Sort.IsNullOrEmpty())
+        //    if (!string.IsNullOrEmpty(queryDto.Sort))
         //    {
         //        var orderType = OrderByType.Asc;
 

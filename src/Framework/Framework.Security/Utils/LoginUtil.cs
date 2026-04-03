@@ -95,7 +95,9 @@ namespace Framework.Security
             }
             catch
             {
-                throw new CodeException(ErrorEnum.NoLoginUser.ToInt(), CommonLocalization.NoLoginUser);
+                //Todo 抛出Code 异常
+                throw new Exception("");
+                //throw new CodeException(ErrorEnum.NoLoginUser.ToInt(), CommonLocalization.NoLoginUser);
             }
         }
 
@@ -113,7 +115,9 @@ namespace Framework.Security
             }
             catch
             {
-                throw new CodeException(ErrorEnum.NoLoginUser.ToInt(), CommonLocalization.NoLoginUser);
+                //Todo 抛出Code 异常
+                throw new Exception("");
+                //throw new CodeException(ErrorEnum.NoLoginUser.ToInt(), FrameworkResource.NoLoginUser);
             }
         }
 
@@ -131,7 +135,9 @@ namespace Framework.Security
             }
             catch
             {
-                throw new CodeException(ErrorEnum.NoLoginUser.ToInt(), CommonLocalization.NoLoginUser);
+                //Todo 抛出Code 异常
+                throw new Exception("");
+                //throw new CodeException(ErrorEnum.NoLoginUser.ToInt(), CommonLocalization.NoLoginUser);
             }
         }
 

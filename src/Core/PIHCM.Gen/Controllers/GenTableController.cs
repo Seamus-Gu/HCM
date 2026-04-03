@@ -17,11 +17,15 @@
         }
 
         [HttpGet("list")]
-        public async Task<IActionResult> Test()
+        public async Task<IActionResult> GetPageList([FromQuery] GenTableQueryDto query)
         {
-            var res = await _genTableService.GetList();
+            var result = await _genTableService.GetPageList(query);
 
-            return Success(res);
+            return Success(new
+            {
+                items = result,
+                total = query.Total
+            });
         }
     }
 }

@@ -126,15 +126,17 @@ namespace Framework.WebApi
         /// <returns></returns>
         protected IActionResult BoolResult(bool isSuccess)
         {
-            var action = _actionMap.TryGetValue(this.HttpContext.Request.Method, out var act)
+            var httpMethod = this.HttpContext.Request.Method;
+            var action = _actionMap.TryGetValue(httpMethod, out var act)
                  ? act
                  : FrameworkConstant.ADD;
 
-            var suffix = isSuccess ? FrameworkConstant.SUCCESS : FrameworkConstant.FAIL;
-            var key = $"{action}_{suffix}";
+            var suffix = isSuccess ? FrameworkConstant.SUCCESS : FrameworkConstant.FAILED;
+            var key = $"{action}{suffix}";
 
-            var message = CommonLocalization.GetString(key) ?? key;
-            return Success(message);
+            var message = FrameworkResource.GetString(key);
+
+            return isSuccess ? Success(message) : Fail(message);
         }
 
         protected IActionResult BadResult(int httpResponseCode, int code, string message)
