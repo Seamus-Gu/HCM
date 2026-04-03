@@ -1,6 +1,6 @@
 namespace PIHCM.Gen.Entities
 {
-    public class GenColumn
+    public class GenColumn : BaseEntity
     {
         /// <summary>
         /// 列名

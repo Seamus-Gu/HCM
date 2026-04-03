@@ -18,6 +18,14 @@
 
         #endregion
 
+        #region 通用异常
+
+        /// <summary>
+        /// 事务异常
+        /// </summary>
+        TranError = 10020001,
+        #endregion
+
         /// <summary>
         /// 表示未登录用户的状态代码。
         /// </summary>

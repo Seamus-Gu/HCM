@@ -36,6 +36,9 @@ namespace PIHCM.Gen.Enums
         [Description("decimal")]
         Decimal = 4,
 
+        [Description("tinyint")]
+        Tinyint = 5,
+
         #endregion
 
         #region 日期和时间

@@ -1,10 +1,10 @@
-﻿
-
-namespace PIHCM.Gen.Services
+﻿namespace PIHCM.Gen.Services
 {
     public class SQLService : ISQLService, IScopeService
     {
         private readonly GenTableRepository _genTableRepository;
+        private readonly GenColumnRepository _genColumnRepository;
+        private readonly ISqlSugarClient _db;
 
         private static readonly Regex _tableNameRegex = new(
             SQLConstant.TABLE_NAME_REGEX,
@@ -42,9 +42,11 @@ namespace PIHCM.Gen.Services
             SQLConstant.CONSTRAINT_DEFINITION_REGEX,
             RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-        public SQLService(GenTableRepository genTableRepository)
+        public SQLService(GenTableRepository genTableRepository, GenColumnRepository genColumnRepository, ISqlSugarClient db)
         {
             _genTableRepository = genTableRepository;
+            _genColumnRepository = genColumnRepository;
+            _db = db;
         }
 
         public async Task<bool> ParseCreateTableSql(SQLGenerateDto sqlDto)
@@ -70,10 +72,32 @@ namespace PIHCM.Gen.Services
                 TableName = tableName,
                 EntityName = NamingUtil.SnakeCaseToCamelCase(tableName),
                 Description = tableDescription,
-                Columns = columns
             };
 
-            return await _genTableRepository.InsertAsync(table);
+            columns.ForEach(t => t.TableId = table.Id);
+
+            var tran = await _db.Ado.UseTranAsync(async () =>
+            {
+                var tableOk = await _genTableRepository.InsertAsync(table);
+                if (!tableOk)
+                {
+                    throw new InvalidOperationException(FrameworkResource.AddFailed);
+                }
+
+                var columnOk = await _genColumnRepository.InsertRangeAsync(columns);
+                if (!columnOk)
+                {
+                    throw new InvalidOperationException(FrameworkResource.AddFailed);
+                }
+            });
+
+            if (!tran.IsSuccess)
+            {
+                //Todo 打印日志 代码出错问题和位置stack
+                return false;
+            }
+
+            return true;
         }
 
         private static string ParseTableName(string sql)
@@ -229,8 +253,27 @@ namespace PIHCM.Gen.Services
 
         private static SqlTypeEnum HandleSqlType(string type)
         {
+            if (string.IsNullOrWhiteSpace(type))
+            {
+                return SqlTypeEnum.Varchar;
+            }
+
+            var normalized = type.Trim().ToLowerInvariant();
+
+            var leftParenIndex = normalized.IndexOf(DelimitersConstant.LEFT_PARENTHESIS);
+            if (leftParenIndex > 0)
+            {
+                normalized = normalized[..leftParenIndex];
+            }
+
+            var spaceIndex = normalized.IndexOf(DelimitersConstant.SPACE);
+            if (spaceIndex > 0)
+            {
+                normalized = normalized[..spaceIndex];
+            }
+
             var enumDic = typeof(SqlTypeEnum).GetDescriptionAndEnum<SqlTypeEnum>();
-            return enumDic.TryGetValue(type, out var sqlType) ? sqlType : SqlTypeEnum.Varchar;
+            return enumDic.TryGetValue(normalized, out var sqlType) ? sqlType : SqlTypeEnum.Varchar;
         }
 
         private static bool IsConstraintDefinition(string definition)

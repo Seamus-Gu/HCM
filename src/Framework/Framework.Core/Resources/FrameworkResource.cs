@@ -11,6 +11,12 @@ namespace Framework.Core
         /// </summary>
         public static string NotLoadConsul => GetString(ErrorEnum.NotLoadConsul.GetName());
 
+        public static string AddFailed => GetString($"{FrameworkConstant.ADD}{FrameworkConstant.FAILED}");
+
+        public static string EditFailed => GetString($"{FrameworkConstant.EDIT}{FrameworkConstant.FAILED}");
+
+        public static string RemoveFailed => GetString($"{FrameworkConstant.REMOVE}{FrameworkConstant.FAILED}");
+
         /// <summary>
         /// 获取对应的I18N消息
         /// </summary>

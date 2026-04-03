@@ -7,6 +7,10 @@
         public const string TYPE = "type";
         public const string KEYS = "keys";
 
+        public const string INTEGER = "integer";
+        public const string NUMERIC = "numeric";
+        public const string NVARCHAR = "nvarchar";
+
         public const string TABLE_NAME_REGEX = """CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?(?<name>[`\"\[]?[A-Za-z0-9_]+[`\"\]]?(?:\.[`\"\[]?[A-Za-z0-9_]+[`\"\]]?)?)""";
         public const string TABLE_COMMENT_REGEX = @"\bCOMMENT\s*=\s*'(?<comment>[^']*)'";
         public const string PRIMARY_KEY_DEFINITION_REGEX = @"^PRIMARY\s+KEY";
