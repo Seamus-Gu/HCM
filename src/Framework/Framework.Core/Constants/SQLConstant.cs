@@ -23,6 +23,7 @@
         public const string TEXT = "text";
         #endregion
 
+        public const string ID = "id";
         public const string CREATED_AT = "created_at";
         public const string CREATED_BY = "created_by";
         public const string UPDATED_AT = "updated_at";

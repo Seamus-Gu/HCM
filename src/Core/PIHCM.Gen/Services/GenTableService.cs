@@ -20,13 +20,25 @@ namespace PIHCM.Gen.Services
             return await _genTableRepository.SelectPageList(query);
         }
 
+        /// <summary>
+        /// 根据Id获取详细信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<GenTable> GetGenTableById(long id)
+        {
+            var result = await _genTableRepository.GetByIdAsync(id);
+
+            return result;
+        }
+
         public async Task<List<GenTemplateDto>> GenerateCode(long tableId)
         {
             var genTable = await _genTableRepository.GetByIdAsync(tableId);
 
             genTable.Columns = await _genColumnRepository.SelectListByTableId(tableId);
 
-            var templateList = GetTemplateList(tableId);
+            var templateList = GetTemplateList(genTable);
 
             foreach (var item in templateList)
             {
@@ -61,14 +73,12 @@ namespace PIHCM.Gen.Services
             return ms;
         }
 
-        private List<GenTemplateDto> GetTemplateList(long tableId)
+        private List<GenTemplateDto> GetTemplateList(GenTable table)
         {
-            var result = new List<GenTemplateDto>();
-
             string folder = Path.Combine(AppContext.BaseDirectory, "Templates", "Common");
-            string genFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Generate", tableId.toString());
+            string genFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Generate", table.Id.toString());
 
-            return new List<GenTemplateDto>
+            var result = new List<GenTemplateDto>
             {
                 new GenTemplateDto
                 {
@@ -95,7 +105,7 @@ namespace PIHCM.Gen.Services
                 {
                     Name = "Interface",
                     Content = File.ReadAllText($"{folder}/Interface.txt"),
-                    GenFolder =  Path.Combine(genFolder,"Backend","Interface"),
+                    GenFolder =  Path.Combine(genFolder,"Backend","Interfaces"),
                     FileName = "I{0}Service.cs"
                 },
                 new GenTemplateDto
@@ -104,8 +114,31 @@ namespace PIHCM.Gen.Services
                     Content = File.ReadAllText($"{folder}/Controller.txt"),
                     GenFolder =  Path.Combine(genFolder,"Backend","Controllers"),
                     FileName = "{0}Controller.cs"
-                }
+                },
+
             };
+
+            if (table.HasFrontend)
+            {
+                result.Add(new GenTemplateDto
+                {
+                    Name = "Api",
+                    Content = File.ReadAllText($"{folder}/Api.txt"),
+                    GenFolder = Path.Combine(genFolder, "Frontend"),
+                    FileName = $"{table.KebabName}.js"
+                });
+
+                result.Add(new GenTemplateDto
+                {
+                    Name = "View",
+                    Content = File.ReadAllText($"{folder}/View.txt"),
+                    GenFolder = Path.Combine(genFolder, "Frontend"),
+                    FileName = "index.vue"
+                });
+            }
+
+
+            return result;
         }
     }
 }

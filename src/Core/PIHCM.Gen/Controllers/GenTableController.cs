@@ -28,6 +28,19 @@
             });
         }
 
+        /// <summary>
+        /// 获取代码生成列详情信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetGenTableById(long id)
+        {
+            var result = await _genTableService.GetGenTableById(id);
+
+            return Success(result);
+        }
+
         [HttpGet("generate-code")]
         public async Task<IActionResult> GenerateCode([FromQuery] long tableId)
         {

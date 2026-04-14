@@ -46,7 +46,7 @@
 		/// <returns></returns>
 		public async Task<bool> Add{{entity_name}}({{entity_name}} entity)
 		{
-			var result = await _{{camel_name}}Repository.Insert{{entity_name}}(entity);
+			var result = await _{{camel_name}}Repository.InsertAsync(entity);
 			
 			return result;			
 		}

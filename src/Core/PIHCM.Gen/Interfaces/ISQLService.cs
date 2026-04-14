@@ -1,4 +1,4 @@
-﻿namespace PIHCM.Gen.Interfances
+﻿namespace PIHCM.Gen.Interfaces
 {
     public interface ISQLService
     {

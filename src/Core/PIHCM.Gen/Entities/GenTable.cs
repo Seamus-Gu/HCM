@@ -4,6 +4,11 @@ namespace PIHCM.Gen.Entities
     public class GenTable : BaseEntity
     {
         /// <summary>
+        /// 名称
+        /// </summary>
+        public virtual string Name { get; set; } = string.Empty;
+
+        /// <summary>
         /// 所属命名空间
         /// </summary>
         public virtual string Namespace { get; set; } = string.Empty;
@@ -17,11 +22,6 @@ namespace PIHCM.Gen.Entities
         /// 实体名称
         /// </summary>
         public virtual string EntityName { get; set; } = string.Empty;
-
-        /// <summary>
-        /// 实体名称
-        /// </summary>
-        public virtual string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// 描述
@@ -47,6 +47,21 @@ namespace PIHCM.Gen.Entities
         /// 需要前端
         /// </summary>
         public virtual bool HasFrontend { get; set; }
+
+        public virtual string TranslationKey { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 表名驼峰命名表示
+        /// </summary>
+        [SugarColumn(IsIgnore = true)]
+        public string ModuleName
+        {
+            get
+            {
+                string module = this.TableName.Replace(FrameworkConstant.FRAMEWORK_PREFIX + DelimitersConstant.DOT, string.Empty);
+                return NamingUtil.CamelCaseToKebabCase(module);
+            }
+        }
 
         /// <summary>
         /// 表名驼峰命名表示

@@ -1,0 +1,45 @@
+import request from "@/utils/request";
+const baseUrl = "{{module_name}}/v1/{{kebab_name}}";
+
+// 获取{{name}}列表
+export function get{{entity_name}}List(query) {
+  return request({
+    url: baseUrl + "/list",
+    method: "get",
+    params: query,
+  });
+}
+
+// 根据id获取{{name}}详细信息
+export function get{{entity_name}}ById(id) {
+  return request({
+    url: baseUrl + "/" + id,
+    method: "get",
+  });
+}
+
+// 添加{{name}}
+export function add{{entity_name}}(data) {
+  return request({
+    url: baseUrl + "/add",
+    method: "post",
+    data: data,
+  });
+}
+
+// 修改{{name}}
+export function edit{{entity_name}}(data) {
+  return request({
+    url: baseUrl + "/edit",
+    method: "put",
+    data: data,
+  });
+}
+
+// 删除{{name}}
+export function remove{{entity_name}}(id) {
+  return request({
+    url: baseUrl + "/remove/" + id,
+    method: "delete",
+  });
+}

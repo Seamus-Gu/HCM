@@ -25,14 +25,33 @@ namespace Framework.Core.Utils
 
             var ms = new MemoryStream();
 
-            var folderName = new DirectoryInfo(dir).Name;
+            using (var archive = new ZipArchive(ms, ZipArchiveMode.Create, leaveOpen: true))
+            {
+                var directoryInfo = new DirectoryInfo(dir);
 
-            ZipFile.CreateFromDirectory(
-                   sourceDirectoryName: dir,
-                   destination: ms,
-                   compressionLevel: CompressionLevel.Optimal,
-                   includeBaseDirectory: true
-               );
+                var files = directoryInfo.GetFiles("*", SearchOption.AllDirectories);
+
+                foreach (var file in files)
+                {
+                    // 计算相对路径（相对于源文件夹）
+                    string relativePath = file.FullName.Substring(directoryInfo.FullName.Length).TrimStart('\\', '/');
+
+                    // 如果有指定rootdir，添加到路径前
+                    string entryName = string.IsNullOrEmpty(rootdir)
+                        ? relativePath
+                        : Path.Combine(rootdir, relativePath).Replace("\\", "/");
+
+                    // 创建zip条目
+                    var entry = archive.CreateEntry(entryName, CompressionLevel.Optimal);
+
+                    // 写入文件内容
+                    using (var entryStream = entry.Open())
+                    using (var fileStream = file.OpenRead())
+                    {
+                        fileStream.CopyTo(entryStream);
+                    }
+                }
+            }
 
             ms.Position = 0;
 

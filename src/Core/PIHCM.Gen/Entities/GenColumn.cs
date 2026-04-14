@@ -25,11 +25,6 @@ namespace PIHCM.Gen.Entities
         public virtual bool IsNullable { get; set; }
 
         /// <summary>
-        /// 是否为主键
-        /// </summary>
-        public virtual bool IsPrimaryKey { get; set; }
-
-        /// <summary>
         /// 字段长度
         /// </summary>
         public virtual int? TypeLength { get; set; }
@@ -39,10 +34,20 @@ namespace PIHCM.Gen.Entities
         /// </summary>
         public virtual int? Point { get; set; }
 
-        ///// <summary>
-        ///// 组件类型
-        ///// </summary>
-        //public virtual int? ComponentType { get; set; }
+        /// <summary>
+        /// Gets or sets the key used to identify the translation resource associated with this instance.
+        /// </summary>
+        public virtual string TranslationKey { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 是否在页面隐藏
+        /// </summary>
+        public virtual bool IsHidden { get; set; }
+
+        /// <summary>
+        /// 组件类型
+        /// </summary>
+        public virtual CommontTypeEnum? ComponentType { get; set; }
 
         /// <summary>
         /// 所属GenTableId

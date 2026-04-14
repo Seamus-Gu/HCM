@@ -1,0 +1,235 @@
+<template>
+  <div class="{{kebab_name}}-container">
+    <s-row>
+      <s-col :span="24">
+        <s-panel>
+          <s-query-form
+            :filters="filters"
+            :schema="querySchema"
+            :queryLoad="queryLoad"
+            :resetLoad="resetLoad"
+            @query="handleQuery"
+            @reset="handleReset"
+          ></s-query-form>
+        </s-panel>
+      </s-col>
+    </s-row>
+    <s-row>
+      <s-col :span="24">
+        <s-panel>
+          <s-tool-bar
+            :addPer="['{{module_name}}:{{kebba_name}}:add']"
+            :columns="columns"
+            @add="handleAdd"
+            @refresh="handleRefresh"
+          >
+          </s-tool-bar>
+          <s-table
+            ref="tableRef"
+            :api="get{{entity_name}}List"
+            :columns="columns"
+          >
+            <template #action="{ row }">
+              <s-button
+                v-has="['{{module_name}}:{{kebba_name}}:edit']"
+                link
+                type="primary"
+                size="small"
+                @click="handleEdit(row.id)"
+              >
+                修改
+              </s-button>
+              <s-divider direction="vertical" />
+              <s-button
+                v-has="['{{module_name}}:{{kebba_name}}:remove']"
+                link
+                type="primary"
+                size="small"
+                @click="handleRemove(row.id)"
+              >
+                删除
+              </s-button>
+            </template>
+          </s-table>
+        </s-panel>
+      </s-col>
+    </s-row>
+    <s-form
+      ref="formRef"
+      :schema="formSchema"
+      :visible="formVisible"
+      :title="formTitle"
+      :model="formState"
+      :rules="formRules"
+      :confirmLoading="confirmLoading"
+      @confirm="handleSubmit"
+      @close="handleClose"
+    >
+    </s-form>
+  </div>
+</template>
+<script setup>
+//#region 引用
+import { useI18n } from 'vue-i18n'
+import {
+  get{{entity_name}}List,
+  get{{entity_name}}ById,
+  add{{entity_name}},
+  edit{{entity_name}},
+  remove{{entity_name}},
+} from '@/api/{{module_name}}/{{kebba_name}}';
+
+const { t, locale } = useI18n()
+const { proxy } = getCurrentInstance();
+//#endregion
+
+//#region 查询列
+const querySchema = [];
+//#endregion
+
+//#region 列 && 表单
+// 列配置
+const columns = [{% for column in columns %}{% if column.is_hidden == false and column.component_type  %}
+  {
+    label: t('{{ column.translation_key }}'),
+    name: '{{ column.camel_name }}',
+    sortable: true
+  },{% endif %}{% endfor %}
+  {
+    label: '操作',
+    name: 'action'
+  }
+];
+
+// 表单配置
+const formSchema = [{% for column in columns %}{% if column.is_hidden == false %}
+  {
+    label: t('{{ column.translation_key }}'),
+    name: '{{ column.camel_name }}',
+    component: 'input'
+  },{% endif %}{% endfor %}
+];
+
+// 校验规则
+const formRules = {};
+//#endregion
+
+//#region 绑定值
+// Table列表
+const filters = ref({}); 
+const queryLoad = ref(false); 
+const resetLoad = ref(false);
+const tableRef = ref();
+
+// 表单
+const formVisible = ref(false);
+const formTitle = ref(t("common.add") + t("{{translation_key}}")); 
+const confirmLoading = ref(false);
+const formRef = ref(); 
+
+// 表单数据
+const formState = ref({
+    id: undefined,{% for column in columns %}
+    {{ column.camel_name }}: undefined,{% endfor %}
+})
+
+//#endregion
+
+//#region 方法
+// 查询
+function handleQuery() {
+  queryLoad.value = true;
+  tableRef.value.reset(filters.value).finally(() => {
+    queryLoad.value = false;
+  });
+}
+
+// 重置
+function handleReset() {
+  filters.value = {};
+  resetLoad.value = true;
+  tableRef.value.reset(filters.value).finally(() => {
+    resetLoad.value = false;
+  });
+}
+
+// 新增
+function handleAdd() {
+  formTitle.value = t("common.add") + t("{{translation_key}}");
+  formVisible.value = true;
+}
+
+// 刷新
+function handleRefresh() {
+  tableRef.value.refresh(filters.value);
+}
+
+// 编辑
+function handleEdit(id) {
+  formTitle.value = t("common.edit") + t("{{translation_key}}");
+
+  get{{entity_name}}ById(id).then((res) => {
+    Object.assign(formState.value, res.data);
+    nextTick(() => {
+      formVisible.value = true;
+    });
+  });
+}
+
+// 删除
+function handleRemove(id) {
+  proxy.$modal.delete({
+    success: () => {
+      filters.value = {};
+      return remove{{entity_name}}(id).then(() => {
+        tableRef.value.reset(filters.value);
+      });
+    },
+  });
+}
+
+// 关闭表单
+function handleClose() {
+  formRef.value.resetFields();
+  handleResetForm();
+  formVisible.value = false;
+}
+
+// 重置表单
+function handleResetForm() {
+  formState.value = {
+    id: undefined,
+    {% for column in columns %}
+    {{ column.camel_name }}: undefined,{% endfor %}
+  }
+}
+
+// 提交表单
+function handleSubmit() {
+  formRef.value.validate().then(() => {
+    confirmLoading.value = true;
+    if (formState.value.id) {
+      edit{{entity_name}}(formState.value)
+        .then((res) => {
+          filters.value = {};
+          tableRef.value.reset();
+          handleClose();
+        })
+        .finally(() => {
+          confirmLoading.value = false;
+        });
+    } else {
+      add{{entity_name}}(formState.value)
+        .then((res) => {
+          filters.value = {};
+          tableRef.value.reset();
+          formVisible.value = false;
+        })
+        .finally(() => {
+          confirmLoading.value = false;
+        });
+    }
+  });
+}
+//#endregion
+</script>

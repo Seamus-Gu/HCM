@@ -59,19 +59,18 @@
                 throw new ArgumentException("无法从 SQL 中解析表名。", nameof(sqlDto));
             }
 
-            var tableDescription = ParseTableComment(sql);
+            var name = ParseTableComment(sql) ?? string.Empty;
             var tableBody = ParseTableBody(sql);
             var definitions = SplitDefinitions(tableBody);
 
-            var primaryKeys = ParsePrimaryKeys(definitions);
-            var columns = ParseColumns(definitions, primaryKeys);
+            var columns = ParseColumns(definitions, name);
 
             var table = new GenTable
             {
                 Namespace = App.AppName,
+                Name = name,
                 TableName = tableName,
                 EntityName = NamingUtil.SnakeCaseToCamelCase(tableName),
-                Description = tableDescription,
             };
 
             columns.ForEach(t => t.TableId = table.Id);
@@ -187,37 +186,7 @@
             return result;
         }
 
-        private static HashSet<string> ParsePrimaryKeys(List<string> definitions)
-        {
-            var primaryKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-            foreach (var item in definitions)
-            {
-                if (!_primaryKeyDefinitionRegex.IsMatch(item))
-                {
-                    continue;
-                }
-
-                var match = _primaryKeyColumnsRegex.Match(item);
-                if (!match.Success)
-                {
-                    continue;
-                }
-
-                var keys = match.Groups[SQLConstant.KEYS].Value
-                    .Split(DelimitersConstant.COMMA, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-                    .Select(TrimQuotes);
-
-                foreach (var key in keys)
-                {
-                    primaryKeys.Add(key);
-                }
-            }
-
-            return primaryKeys;
-        }
-
-        private static List<GenColumn> ParseColumns(List<string> definitions, HashSet<string> primaryKeys)
+        private static List<GenColumn> ParseColumns(List<string> definitions, string tableName)
         {
             var columns = new List<GenColumn>(definitions.Count);
 
@@ -238,6 +207,11 @@
                 var descriptionMatch = _columnCommentRegex.Match(item);
                 var isPrimaryKeyInline = _inlinePrimaryKeyRegex.IsMatch(item);
 
+                if (name == $"{tableName}{DelimitersConstant.UNDERSCORE}{SQLConstant.ID}")
+                {
+                    continue;
+                }
+
                 if (name == SQLConstant.CREATED_AT || name == SQLConstant.CREATED_BY || name == SQLConstant.UPDATED_AT || name == SQLConstant.UPDATED_BY)
                 {
                     continue;
@@ -248,7 +222,6 @@
                     ColumnName = name,
                     ColumnType = HandleSqlType(match.Groups[SQLConstant.TYPE].Value),
                     IsNullable = !_notNullRegex.IsMatch(item),
-                    IsPrimaryKey = isPrimaryKeyInline || primaryKeys.Contains(name),
                     ColumnDesc = descriptionMatch.Success ? descriptionMatch.Groups[SQLConstant.COMMENT].Value : null
                 });
             }
@@ -273,8 +246,6 @@
             }
 
             return normalized;
-            //var enumDic = typeof(SqlTypeEnum).GetDescriptionAndEnum<SqlTypeEnum>();
-            //return enumDic.TryGetValue(normalized, out var sqlType) ? sqlType : SqlTypeEnum.Varchar;
         }
 
         private static bool IsConstraintDefinition(string definition)

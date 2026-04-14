@@ -11,11 +11,11 @@ namespace Framework.Core
     {
         // 请使用中文注释
         /// <summary>
-        /// 将下划线命名法（snake_case）字符串转换为大驼峰命名法（CamelCase）字符串。
+        /// 将下划线命名法（snake_case）字符串转换为驼峰命名法（CamelCase）字符串。
         /// </summary>
         /// <remarks>每个下划线分隔的单词首字母将被大写，结果字符串不包含下划线。转换时会使用当前区域性进行大小写处理。</remarks>
         /// <param name="snakeCase">要转换的下划线命名法字符串。不能为空或仅包含空白字符。</param>
-        /// <returns>转换后的大驼峰命名法字符串。如果输入为空或仅包含空白字符，则返回空字符串。</returns>
+        /// <returns>转换后的驼峰命名法字符串。如果输入为空或仅包含空白字符，则返回空字符串。</returns>
         public static string SnakeCaseToCamelCase(string snakeCase)
         {
             if (string.IsNullOrWhiteSpace(snakeCase))
@@ -24,7 +24,9 @@ namespace Framework.Core
             }
 
             var words = snakeCase.Split(DelimitersConstant.UNDERSCORE);
-            for (int i = 0; i < words.Length; i++)
+            words[0] = words[0].ToLower();
+
+            for (int i = 1; i < words.Length; i++)
             {
                 words[i] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(words[i].ToLower());
             }

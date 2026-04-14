@@ -5,7 +5,7 @@ global using Microsoft.AspNetCore.Mvc;
 global using PIHCM.Gen.Dto;
 global using PIHCM.Gen.Entities;
 global using PIHCM.Gen.Enums;
-global using PIHCM.Gen.Interfances;
+global using PIHCM.Gen.Interfaces;
 global using PIHCM.Gen.Repositories;
 global using SqlSugar;
 global using System.ComponentModel;
