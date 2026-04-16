@@ -3,7 +3,7 @@ namespace PIHCM.Gen.Controller
     /// <summary>
     /// 代码生成列接口层
     /// </summary>
-    [Route("v1/[controller]")]
+    [ApiRoute("[controller]")]
     public class GenColumnController : BaseController
     {
         private readonly IGenColumnService _genColumnService;
@@ -71,7 +71,7 @@ namespace PIHCM.Gen.Controller
             return BoolResult(result);
         }
 
-        /// <summary
+        /// <summary>
         /// 删除代码生成列
         /// </summary>
         /// <param name="id"></param>

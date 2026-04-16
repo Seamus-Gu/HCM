@@ -6,7 +6,7 @@
     /// <remarks>该控制器作为 API 端点，通常用于管理和操作代码生成相关的数据表。所有路由均以 "api/GenTable" 开头。继承自 BaseController，可能包含通用的 API
     /// 响应处理逻辑。</remarks>
 
-    [Route("v1/[controller]")]
+    [ApiRoute("[controller]")]
     public class SQLController : BaseController
     {
         private readonly ISQLService _sqlService;

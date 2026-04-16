@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using Asp.Versioning;
+using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Framework.Cache;
 using Framework.Consul;
@@ -91,6 +92,19 @@ namespace Framework.Platform
                     options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;//驼峰
                     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;//驼峰
                 }); ;
+
+            services.AddApiVersioning(options =>
+            {
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.ReportApiVersions = true;
+                options.ApiVersionReader = new UrlSegmentApiVersionReader();
+            }).AddMvc()
+            .AddApiExplorer(options =>
+            {
+                options.GroupNameFormat = "'v'VVV";        // 版本格式: v1, v2
+                options.SubstituteApiVersionInUrl = true;  // 替换 URL 中的版本参数
+            });
 
             services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
 

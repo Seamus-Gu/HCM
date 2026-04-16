@@ -3,7 +3,7 @@
 	/// <summary>
 	/// {{name}}接口层
 	/// </summary>
-    [Route("v1/[controller]")]
+    [ApiRoute("[controller]")]
 	public class {{entity_name}}Controller : BaseController
 	{
 		private readonly I{{entity_name}}Service _{{camel_name}}Service;

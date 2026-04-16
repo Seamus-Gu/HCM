@@ -7,7 +7,7 @@ namespace PIHCM.Auth.Controllers
     /// <summary>
     /// 权鉴接口
     /// </summary>
-    [Route("v1")]
+    [ApiRoute("")]
     public class AuthController : BaseController
     {
         //private readonly GrpcService<IRemoteSysUserService> _remoteSysUserService;

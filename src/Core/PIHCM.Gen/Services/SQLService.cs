@@ -14,14 +14,6 @@
             SQLConstant.TABLE_COMMENT_REGEX,
             RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-        private static readonly Regex _primaryKeyDefinitionRegex = new(
-            SQLConstant.PRIMARY_KEY_DEFINITION_REGEX,
-            RegexOptions.IgnoreCase | RegexOptions.Compiled);
-
-        private static readonly Regex _primaryKeyColumnsRegex = new(
-            SQLConstant.PRIMARY_KEY_COLUMNS_REGEX,
-            RegexOptions.IgnoreCase | RegexOptions.Compiled);
-
         private static readonly Regex _columnDefinitionRegex = new(
             SQLConstant.COLUMN_DEFINITION_REGEX,
             RegexOptions.IgnoreCase | RegexOptions.Compiled);
@@ -77,17 +69,8 @@
 
             var tran = await _db.Ado.UseTranAsync(async () =>
             {
-                var tableOk = await _genTableRepository.InsertAsync(table);
-                if (!tableOk)
-                {
-                    throw new InvalidOperationException(FrameworkResource.AddFailed);
-                }
-
-                var columnOk = await _genColumnRepository.InsertRangeAsync(columns);
-                if (!columnOk)
-                {
-                    throw new InvalidOperationException(FrameworkResource.AddFailed);
-                }
+                await _genTableRepository.InsertAsync(table);
+                await _genColumnRepository.InsertRangeAsync(columns);
             });
 
             if (!tran.IsSuccess)

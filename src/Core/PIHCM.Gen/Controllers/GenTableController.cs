@@ -6,7 +6,7 @@
     /// <remarks>该控制器作为 API 端点，通常用于管理和操作代码生成相关的数据表。所有路由均以 "api/GenTable" 开头。继承自 BaseController，可能包含通用的 API
     /// 响应处理逻辑。</remarks>
 
-    [Route("v1/[controller]")]
+    [ApiRoute("[controller]")]
     public class GenTableController : BaseController
     {
         private readonly IGenTableService _genTableService;
@@ -39,6 +39,32 @@
             var result = await _genTableService.GetGenTableById(id);
 
             return Success(result);
+        }
+
+        /// <summary>
+        /// 修改代码生成列
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        [HttpPut("edit")]
+        public async Task<IActionResult> EditGenTable([FromBody] GenTable entity)
+        {
+            var result = await _genTableService.EditGenTable(entity);
+
+            return BoolResult(result);
+        }
+
+        /// <summary>
+        /// 删除代码生成表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("remove/{id}")]
+        public async Task<IActionResult> RemoveGenTableById(long id)
+        {
+            var result = await _genTableService.RemoveGenTableById(id);
+
+            return BoolResult(result);
         }
 
         [HttpGet("generate-code")]

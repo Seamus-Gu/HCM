@@ -8,11 +8,13 @@ namespace PIHCM.Gen.Services
     {
         private readonly GenTableRepository _genTableRepository;
         private readonly GenColumnRepository _genColumnRepository;
+        private readonly ISqlSugarClient _db;
 
-        public GenTableService(GenTableRepository repository, GenColumnRepository genColumnRepository)
+        public GenTableService(GenTableRepository repository, GenColumnRepository genColumnRepository, ISqlSugarClient db)
         {
             _genTableRepository = repository;
             _genColumnRepository = genColumnRepository;
+            _db = db;
         }
 
         public async Task<List<GenTable>> GetPageList(GenTableQueryDto query)
@@ -30,6 +32,41 @@ namespace PIHCM.Gen.Services
             var result = await _genTableRepository.GetByIdAsync(id);
 
             return result;
+        }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public async Task<bool> EditGenTable(GenTable entity)
+        {
+            var result = await _genTableRepository.UpdateAsync(entity);
+
+            return result;
+        }
+
+        /// <summary>
+        /// 根据Id删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<bool> RemoveGenTableById(long tableId)
+        {
+            var tran = await _db.Ado.UseTranAsync(async () =>
+            {
+                await _genTableRepository.DeleteByIdAsync(tableId);
+
+                _genColumnRepository.AsDeleteable()
+                .Where(gc => gc.TableId == tableId);
+            });
+
+            if (!tran.IsSuccess)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public async Task<List<GenTemplateDto>> GenerateCode(long tableId)
