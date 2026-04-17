@@ -25,8 +25,8 @@ namespace Framework.Core
 
         public Result(Exception err)
         {
-            Code = (int)HttpStatusCode.BadRequest;
-            Message = err.Message;
+            this.Code = (int)HttpStatusCode.BadRequest;
+            this.Message = err.Message;
         }
 
         public Result(CodeException ex)

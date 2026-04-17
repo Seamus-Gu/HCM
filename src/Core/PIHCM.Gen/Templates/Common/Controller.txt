@@ -19,17 +19,17 @@
 		/// <summary>
 		/// 获取{{name}}分页列表
 		/// </summary>
-		/// <param name="filter"></param>
+		/// <param name="query"></param>
 		/// <returns></returns>
 		[HttpGet("list")]
-		public async Task<IActionResult> Get{{entity_name}}PageList([FromQuery] Pagination filter)
+		public async Task<IActionResult> Get{{entity_name}}PageList([FromQuery] Pagination query)
 		{
-			var result = await _{{camel_name}}Service.Get{{entity_name}}PageList(filter);
-			return Success(new
-			{
-				items = result,
-				total = filter.Total
-			});
+			var result = await _{{camel_name}}Service.Get{{entity_name}}PageList(query);
+			return Success(new PageResult<{{entity_name}}>
+            {
+                Items = result,
+                Total = filter.Total
+            });
 		}
 			
 		/// <summary>

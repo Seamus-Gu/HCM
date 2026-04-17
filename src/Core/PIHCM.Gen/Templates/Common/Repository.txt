@@ -15,11 +15,11 @@
 		/// <summary>
 		/// 获取{{name}}分页列表
 		/// </summary>
-		public Task<List<{{entity_name}}>> Select{{entity_name}}PageList(Pagination filter)
+		public Task<List<{{entity_name}}>> Select{{entity_name}}PageList(Pagination query)
 		{
 			var q = AsQueryable();
 
-			return PaginationListAsync(q, filter);
+			return PaginationListAsync(q, query);
 		}
 	}
 }

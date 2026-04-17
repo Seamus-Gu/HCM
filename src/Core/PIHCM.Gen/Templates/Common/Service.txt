@@ -18,11 +18,11 @@
 		/// <summary>
 		/// 获取{{column_name}}分页列表
 		/// </summary>
-		/// <param name="filter"></param>
+		/// <param name="query"></param>
 		/// <returns></returns>
-		public async Task<List<{{entity_name}}>> Get{{entity_name}}PageList(Pagination filter)
+		public async Task<List<{{entity_name}}>> Get{{entity_name}}PageList(Pagination query)
 		{
-			var result = await _{{camel_name}}Repository.Select{{entity_name}}PageList(filter);
+			var result = await _{{camel_name}}Repository.Select{{entity_name}}PageList(query);
 			
 			return result;
 		}

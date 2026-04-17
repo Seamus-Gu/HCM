@@ -21,10 +21,10 @@
         {
             var result = await _genTableService.GetPageList(query);
 
-            return Success(new
+            return Success(new PageResult<GenTable>
             {
-                items = result,
-                total = query.Total
+                Items = result,
+                Total = query.Total
             });
         }
 
