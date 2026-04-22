@@ -2,7 +2,7 @@
 
 namespace Framework.Grpc
 {
-    public interface IRemoteService<T> : IService<T>
+    public interface IServiceClient<T> : IService<T>
     {
     }
 }

@@ -58,7 +58,7 @@ namespace PIHCM.Gen.Entities
         {
             get
             {
-                string module = this.TableName.Replace(FrameworkConstant.FRAMEWORK_PREFIX + DelimitersConstant.DOT, string.Empty);
+                string module = this.Namespace.Replace(FrameworkConstant.FRAMEWORK_PREFIX + DelimitersConstant.DOT, string.Empty);
                 return NamingUtil.CamelCaseToKebabCase(module);
             }
         }

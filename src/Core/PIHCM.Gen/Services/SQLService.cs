@@ -190,26 +190,56 @@
                 var descriptionMatch = _columnCommentRegex.Match(item);
                 var isPrimaryKeyInline = _inlinePrimaryKeyRegex.IsMatch(item);
 
-                if (name == $"{tableName}{DelimitersConstant.UNDERSCORE}{SQLConstant.ID}")
+                if (IsHandle(name, tableName))
                 {
                     continue;
                 }
 
-                if (name == SQLConstant.CREATED_AT || name == SQLConstant.CREATED_BY || name == SQLConstant.UPDATED_AT || name == SQLConstant.UPDATED_BY)
-                {
-                    continue;
-                }
+                var type = HandleSqlType(match.Groups[SQLConstant.TYPE].Value);
 
                 columns.Add(new GenColumn
                 {
                     ColumnName = name,
-                    ColumnType = HandleSqlType(match.Groups[SQLConstant.TYPE].Value),
+                    ColumnType = type,
                     IsNullable = !_notNullRegex.IsMatch(item),
-                    ColumnDesc = descriptionMatch.Success ? descriptionMatch.Groups[SQLConstant.COMMENT].Value : null
+                    ColumnDesc = descriptionMatch.Success ? descriptionMatch.Groups[SQLConstant.COMMENT].Value : null,
+                    IsHidden = type == SQLConstant.LONG,
+                    ComponentType = type != SQLConstant.CHAR ? CommontTypeEnum.Input : CommontTypeEnum.Select
                 });
             }
 
             return columns;
+        }
+
+        private static bool IsHandle(string columnName, string tableName)
+        {
+            var snakeTableName = NamingUtil.SnakeCaseToKebabCase(tableName);
+            if (columnName == $"{snakeTableName}{DelimitersConstant.UNDERSCORE}{SQLConstant.ID}")
+            {
+                return true;
+            }
+
+            if (columnName == SQLConstant.CREATED_BY)
+            {
+                return true;
+            }
+
+            if (columnName == SQLConstant.CREATED_AT)
+            {
+                return true;
+            }
+
+            if (columnName == SQLConstant.UPDATED_BY)
+            {
+                return true;
+            }
+
+            if (columnName == SQLConstant.UPDATED_AT)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private static string HandleSqlType(string type)

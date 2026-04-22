@@ -1,7 +1,7 @@
 ﻿
 namespace PIHCM.Auth.Services
 {
-    public class AuthService
+    public class AuthService : IAuthService, IScopeService
     {
         //private readonly IStringLocalizer<AuthLocalization> _localizer;
 

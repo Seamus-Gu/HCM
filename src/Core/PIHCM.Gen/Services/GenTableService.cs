@@ -136,7 +136,7 @@ namespace PIHCM.Gen.Services
                     Name = "Service",
                     Content = File.ReadAllText($"{folder}/Service.txt"),
                     GenFolder =  Path.Combine(genFolder,"Backend","Services"),
-                    FileName = "{0}Services.cs"
+                    FileName = "{0}Service.cs"
                 },
                 new GenTemplateDto
                 {

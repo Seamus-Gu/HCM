@@ -2,7 +2,7 @@
 
 namespace PIHCM.Api.Core
 {
-    public interface IRemoteSysUserService : IRemoteService<IRemoteSysUserService>
+    public interface ISysUserServiceClient : IServiceClient<ISysUserServiceClient>
     {
         /// <summary>
         /// 通过用户名查询用户信息

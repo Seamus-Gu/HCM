@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Api\PIHCM.Api.Core\PIHCM.Api.Core.csproj" />
     <ProjectReference Include="..\..\Framework\Framework.Platform\Framework.Platform.csproj" />
   </ItemGroup>
 

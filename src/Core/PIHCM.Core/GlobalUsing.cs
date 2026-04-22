@@ -1,1 +1,14 @@
-﻿global using Framework.Platform;
+﻿global using Framework.Core;
+global using Framework.Platform;
+global using Framework.WebApi;
+global using MagicOnion;
+global using MagicOnion.Server;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.Localization;
+global using PIHCM.Api.Core;
+global using PIHCM.Api.Core.Entities;
+global using PIHCM.Core.Entities;
+global using PIHCM.Core.Interfaces;
+global using PIHCM.Core.Repositories;
+global using PIHCM.Core.Resources;
+global using SqlSugar;

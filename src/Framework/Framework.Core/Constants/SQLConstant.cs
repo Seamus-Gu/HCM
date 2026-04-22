@@ -5,6 +5,7 @@
         #region 类型
         public const string INT = "int";
         public const string INTEGER = "integer";
+        public const string LONG = "long";
         public const string BIGINT = "bigint";
         public const string FLOAT = "float";
         public const string DOUBLE = "double";

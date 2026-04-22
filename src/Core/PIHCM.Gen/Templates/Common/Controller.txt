@@ -28,7 +28,7 @@
 			return Success(new PageResult<{{entity_name}}>
             {
                 Items = result,
-                Total = filter.Total
+                Total = query.Total
             });
 		}
 			
@@ -71,7 +71,7 @@
 			return BoolResult(result);
 		}
 			
-		/// <summary
+		/// <summary>
 		/// 删除{{name}}
 		/// </summary>
 		/// <param name="id"></param>

@@ -1,6 +1,6 @@
 ﻿namespace Framework.Grpc
 {
-    public class GrpcService<TService> where TService : IRemoteService<TService>
+    public class GrpcService<TService> where TService : IServiceClient<TService>
     {
         private readonly TService _proxy;
         private readonly GrpcChannelFactory _grpcChannelFactory;

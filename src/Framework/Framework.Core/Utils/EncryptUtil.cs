@@ -1,11 +1,11 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Framework.Core.Utils
+namespace Framework.Core
 {
 
     //Todo 加密解密（MD5、SHA256、AES、RSA）
-    internal class EncryptUtil
+    public class EncryptUtil
     {
         public static string MD5(string input)
         {

@@ -1,10 +1,10 @@
 import request from "@/utils/request";
-const baseUrl = "{{module_name}}/v1/{{kebab_name}}";
+const baseUrl = "{{module_name}}/v1/{{kebab_name}}/";
 
 // 获取{{name}}列表
 export function get{{entity_name}}List(query) {
   return request({
-    url: baseUrl + "/list",
+    url: baseUrl + "list",
     method: "get",
     params: query,
   });
@@ -13,7 +13,7 @@ export function get{{entity_name}}List(query) {
 // 根据id获取{{name}}详细信息
 export function get{{entity_name}}ById(id) {
   return request({
-    url: baseUrl + "/" + id,
+    url: baseUrl + id,
     method: "get",
   });
 }
@@ -21,7 +21,7 @@ export function get{{entity_name}}ById(id) {
 // 添加{{name}}
 export function add{{entity_name}}(data) {
   return request({
-    url: baseUrl + "/add",
+    url: baseUrl + "add",
     method: "post",
     data: data,
   });
@@ -30,7 +30,7 @@ export function add{{entity_name}}(data) {
 // 修改{{name}}
 export function edit{{entity_name}}(data) {
   return request({
-    url: baseUrl + "/edit",
+    url: baseUrl + "edit",
     method: "put",
     data: data,
   });
@@ -39,7 +39,7 @@ export function edit{{entity_name}}(data) {
 // 删除{{name}}
 export function remove{{entity_name}}(id) {
   return request({
-    url: baseUrl + "/remove/" + id,
+    url: baseUrl + "remove/" + id,
     method: "delete",
   });
 }

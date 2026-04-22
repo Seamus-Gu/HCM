@@ -4,18 +4,22 @@ using System.Text;
 namespace Framework.Core
 {
     /// <summary>
-    /// 提供用于不同命名风格（如 snake_case、CamelCase 和 kebab-case）之间转换的静态方法。适用于需要在多种命名规范之间进行字符串格式转换的场景。内部类，仅供程序集内使用。
+    /// Provides utility methods for converting strings between common naming conventions such as snake_case, camelCase,
+    /// PascalCase, and kebab-case.
     /// </summary>
-    /// <remarks>该工具类支持常见的命名风格转换，便于在不同代码风格或外部系统集成时统一命名格式。所有方法均为静态方法，无需实例化即可使用。</remarks>
+    /// <remarks>Use this class to standardize string identifiers across different naming styles required by
+    /// various systems, such as databases, programming languages, or web technologies. All methods handle null or
+    /// whitespace input by returning an empty string. Culture-specific casing rules are applied where appropriate. This
+    /// class is static and cannot be instantiated.</remarks>
     public class NamingUtil
     {
-        // 请使用中文注释
         /// <summary>
-        /// 将下划线命名法（snake_case）字符串转换为驼峰命名法（CamelCase）字符串。
+        /// Converts a string from snake_case format to camelCase format.
         /// </summary>
-        /// <remarks>每个下划线分隔的单词首字母将被大写，结果字符串不包含下划线。转换时会使用当前区域性进行大小写处理。</remarks>
-        /// <param name="snakeCase">要转换的下划线命名法字符串。不能为空或仅包含空白字符。</param>
-        /// <returns>转换后的驼峰命名法字符串。如果输入为空或仅包含空白字符，则返回空字符串。</returns>
+        /// <remarks>The first word is converted to lowercase, and subsequent words are capitalized.
+        /// Delimiters are defined by DelimitersConstant.UNDERSCORE.</remarks>
+        /// <param name="snakeCase">The input string in snake_case format to convert. Cannot be null or whitespace.</param>
+        /// <returns>A string converted to camelCase format. Returns an empty string if the input is null or whitespace.</returns>
         public static string SnakeCaseToCamelCase(string snakeCase)
         {
             if (string.IsNullOrWhiteSpace(snakeCase))
@@ -35,78 +39,13 @@ namespace Framework.Core
         }
 
         /// <summary>
-        /// 将蛇形命名（snake_case）字符串转换为短横线命名（kebab-case）格式。
+        /// Converts a string from snake_case format to PascalCase format.
         /// </summary>
-        /// <param name="snakeCase">要转换的蛇形命名字符串。不能为空或仅包含空白字符。</param>
-        /// <returns>转换后的短横线命名字符串。如果输入为空或仅包含空白字符，则返回空字符串。</returns>
-        public static string SnakeCaseToKebabCase(string snakeCase)
-        {
-            if (string.IsNullOrWhiteSpace(snakeCase))
-            {
-                return string.Empty;
-            }
-
-            return snakeCase.ToLower().Replace(DelimitersConstant.UNDERSCORE.First(), DelimitersConstant.DASH.First());
-        }
-
-        /// <summary>
-        /// 将驼峰命名格式的字符串转换为蛇形命名格式。
-        /// </summary>
-        /// <remarks>该方法会将每个大写字母前插入下划线，并将所有字母转换为小写。适用于将 C# 或 Java 风格的变量名转换为数据库或脚本常用的下划线风格。</remarks>
-        /// <param name="camelCase">要转换的驼峰命名格式字符串。不能为空或仅包含空白字符，否则返回空字符串。</param>
-        /// <returns>转换后的蛇形命名格式字符串。如果输入为空或仅包含空白字符，则返回空字符串。</returns>
-        public static string CamelCaseToSnakeCase(string camelCase)
-        {
-            if (string.IsNullOrWhiteSpace(camelCase))
-            {
-                return string.Empty;
-            }
-
-            var stringBuilder = new StringBuilder();
-            for (int i = 0; i < camelCase.Length; i++)
-            {
-                if (char.IsUpper(camelCase[i]) && i > 0)
-                {
-                    stringBuilder.Append(DelimitersConstant.UNDERSCORE);
-                }
-                stringBuilder.Append(char.ToLower(camelCase[i]));
-            }
-
-            return stringBuilder.ToString();
-        }
-
-        /// <summary>
-        /// 将驼峰命名格式的字符串转换为短横线分隔的小写字符串（kebab-case）。
-        /// </summary>
-        /// <remarks>该方法适用于将 C# 或 JavaScript 等语言中的驼峰命名标识符转换为常见的 kebab-case 格式，常用于 URL、CSS 类名等场景。</remarks>
-        /// <param name="camelCase">要转换的驼峰命名格式字符串。不能为空或仅包含空白字符。</param>
-        /// <returns>转换后的短横线分隔小写字符串。如果输入为空或仅包含空白字符，则返回空字符串。</returns>
-        public static string CamelCaseToKebabCase(string camelCase)
-        {
-            if (string.IsNullOrWhiteSpace(camelCase))
-            {
-                return string.Empty;
-            }
-
-            var stringBuilder = new StringBuilder();
-            for (int i = 0; i < camelCase.Length; i++)
-            {
-                if (char.IsUpper(camelCase[i]) && i > 0)
-                {
-                    stringBuilder.Append('-');
-                }
-                stringBuilder.Append(char.ToLower(camelCase[i]));
-            }
-
-            return stringBuilder.ToString();
-        }
-
-        /// <summary>
-        /// 将下划线命名法（snake_case）字符串转换为帕斯卡命名法（PascalCase）字符串。
-        /// </summary>
-        /// <remarks>与大驼峰命名法类似，但通常用于表示公共或公开的类型、方法等。</remarks>
-        /// <param name="snakeCase">要转换的下划线命名法字符串。不能为空或仅包含空白字符。</param>
-        /// <returns>转换后的帕斯卡命名法字符串。如果输入为空或仅包含空白字符，则返回空字符串。</returns>
+        /// <remarks>Each word separated by underscores in the input is capitalized and concatenated
+        /// without delimiters. Culture-specific casing rules are applied based on the current culture.</remarks>
+        /// <param name="snakeCase">The input string in snake_case format to convert. Cannot be null or whitespace.</param>
+        /// <returns>A string converted to PascalCase. Returns an empty string if the input is null, empty, or consists only of
+        /// whitespace.</returns>
         public static string SnakeCaseToPascal(string snakeCase)
         {
             if (string.IsNullOrWhiteSpace(snakeCase))
@@ -132,6 +71,95 @@ namespace Framework.Core
             }
 
             return stringBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Converts a string from snake_case format to kebab-case format.
+        /// </summary>
+        /// <param name="snakeCase">The input string in snake_case format to convert. Can be null or empty.</param>
+        /// <returns>A string converted to kebab-case format. Returns an empty string if the input is null, empty, or consists
+        /// only of white-space characters.</returns>
+        public static string SnakeCaseToKebabCase(string snakeCase)
+        {
+            if (string.IsNullOrWhiteSpace(snakeCase))
+            {
+                return string.Empty;
+            }
+
+            return snakeCase.ToLower().Replace(DelimitersConstant.UNDERSCORE.First(), DelimitersConstant.DASH.First());
+        }
+
+        /// <summary>
+        /// Converts a string from camelCase format to snake_case format.
+        /// </summary>
+        /// <remarks>This method inserts underscores before uppercase letters (except the first character)
+        /// and converts all characters to lowercase. Use this method to generate identifiers compatible with systems
+        /// that require snake_case naming.</remarks>
+        /// <param name="camelCase">The camelCase string to convert. Cannot be null or whitespace.</param>
+        /// <returns>A string in snake_case format representing the input. Returns an empty string if the input is null or
+        /// whitespace.</returns>
+        public static string CamelCaseToSnakeCase(string camelCase)
+        {
+            if (string.IsNullOrWhiteSpace(camelCase))
+            {
+                return string.Empty;
+            }
+
+            var stringBuilder = new StringBuilder();
+            for (int i = 0; i < camelCase.Length; i++)
+            {
+                if (char.IsUpper(camelCase[i]) && i > 0)
+                {
+                    stringBuilder.Append(DelimitersConstant.UNDERSCORE);
+                }
+                stringBuilder.Append(char.ToLower(camelCase[i]));
+            }
+
+            return stringBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Converts a camelCase string to kebab-case format.
+        /// </summary>
+        /// <remarks>This method inserts a hyphen before each uppercase letter (except the first
+        /// character) and converts all characters to lowercase. Useful for formatting identifiers for URLs or CSS class
+        /// names.</remarks>
+        /// <param name="camelCase">The input string in camelCase format to convert. Cannot be null or whitespace.</param>
+        /// <returns>A kebab-case representation of the input string. Returns an empty string if the input is null or whitespace.</returns>
+        public static string CamelCaseToKebabCase(string camelCase)
+        {
+            if (string.IsNullOrWhiteSpace(camelCase))
+            {
+                return string.Empty;
+            }
+
+            var stringBuilder = new StringBuilder();
+            for (int i = 0; i < camelCase.Length; i++)
+            {
+                if (char.IsUpper(camelCase[i]) && i > 0)
+                {
+                    stringBuilder.Append('-');
+                }
+                stringBuilder.Append(char.ToLower(camelCase[i]));
+            }
+
+            return stringBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Converts a string from kebab-case to snake_case format.
+        /// </summary>
+        /// <param name="kebabCase">The input string in kebab-case format to convert. Can be null or empty.</param>
+        /// <returns>A string converted to snake_case format. Returns an empty string if the input is null, empty, or consists
+        /// only of white-space characters.</returns>
+        public static string KebabCaseToSnakeCase(string kebabCase)
+        {
+            if (string.IsNullOrWhiteSpace(kebabCase))
+            {
+                return string.Empty;
+            }
+
+            return kebabCase.ToLower().Replace(DelimitersConstant.DASH.First(), DelimitersConstant.UNDERSCORE.First());
         }
     }
 }
