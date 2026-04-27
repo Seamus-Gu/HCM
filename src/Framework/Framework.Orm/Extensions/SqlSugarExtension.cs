@@ -44,11 +44,13 @@ namespace Framework.Orm
                 EntityService = (property, column) =>
                 {
                     if (new NullabilityInfoContext().Create(property).WriteState is NullabilityState.Nullable)
-                        column.IsNullable = true;
-
-                    if (column.DbColumnName == "Id")
                     {
-                        column.DbColumnName = $"{column.DbTableName}_id";
+                        column.IsNullable = true;
+                    }
+
+                    if (column.DbColumnName?.ToLower() == SQLConstant.ID)
+                    {
+                        column.DbColumnName = $"{column.DbTableName}{DelimitersConstant.UNDERSCORE}{SQLConstant.ID}";
                         return;
                     }
 

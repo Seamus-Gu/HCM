@@ -3,11 +3,12 @@ namespace PIHCM.Core.Entities
     /// <summary>
     /// 菜单权限表实体类
     /// </summary>
-    public class SysMenu : TreeEntity
+    public class SysMenu : TreeEntity<SysMenu>
     {
         /// <summary>
         /// 菜单名称
         /// </summary>
+        [SugarColumn(Length = 50)]
         public string MenuName { get; set; } = string.Empty;
 
         /// <summary>
@@ -43,42 +44,13 @@ namespace PIHCM.Core.Entities
         /// <summary>
         /// 权限标识
         /// </summary>
+        [SugarColumn(Length = 100)]
         public string? Permission { get; set; }
 
         /// <summary>
         /// 菜单图标
         /// </summary>
+        [SugarColumn(Length = 20)]
         public string? Icon { get; set; }
-
-        /// <summary>
-        /// 父菜单ID
-        /// </summary>
-        public long ParentId { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int NodeLevel { get; set; }
-
-        /// <summary>
-        /// 显示顺序
-        /// </summary>
-        public int OrderNum { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string? TreeIds { get; set; }
-
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        public DateTime? CreatedTime { get; set; }
-
-        /// <summary>
-        /// 更新时间
-        /// </summary>
-        public DateTime? UpdatedTime { get; set; }
-
     }
 }

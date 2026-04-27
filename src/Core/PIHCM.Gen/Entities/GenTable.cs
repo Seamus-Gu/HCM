@@ -11,16 +11,19 @@ namespace PIHCM.Gen.Entities
         /// <summary>
         /// 所属命名空间
         /// </summary>
+        [SugarColumn(Length = 20)]
         public string Namespace { get; set; } = string.Empty;
 
         /// <summary>
         /// 数据库表名
         /// </summary>
+        [SugarColumn(Length = 20)]
         public string TableName { get; set; } = string.Empty;
 
         /// <summary>
         /// 实体名称
         /// </summary>
+        [SugarColumn(Length = 20)]
         public string EntityName { get; set; } = string.Empty;
 
         /// <summary>
@@ -48,6 +51,7 @@ namespace PIHCM.Gen.Entities
         /// </summary>
         public bool HasFrontend { get; set; }
 
+        [SugarColumn(Length = 50)]
         public string TranslationKey { get; set; } = string.Empty;
 
         /// <summary>

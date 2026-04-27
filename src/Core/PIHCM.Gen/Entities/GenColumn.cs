@@ -7,6 +7,7 @@ namespace PIHCM.Gen.Entities
         /// <summary>
         /// 列名
         /// </summary>
+        [SugarColumn(Length = 20)]
         public string ColumnName { get; set; } = string.Empty;
 
         /// <summary>
@@ -17,6 +18,7 @@ namespace PIHCM.Gen.Entities
         /// <summary>
         /// 列描述(注释)
         /// </summary>
+        [SugarColumn(Length = 20)]
         public string? ColumnDesc { get; set; }
 
         /// <summary>
@@ -37,6 +39,7 @@ namespace PIHCM.Gen.Entities
         /// <summary>
         /// Gets or sets the key used to identify the translation resource associated with this instance.
         /// </summary>
+        [SugarColumn(Length = 50)]
         public string TranslationKey { get; set; } = string.Empty;
 
         /// <summary>

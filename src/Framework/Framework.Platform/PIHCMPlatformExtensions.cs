@@ -138,11 +138,6 @@ namespace Framework.Platform
             //app.UseAuthorization();
             //app.UseMiniProfiler();
 
-            if (App.IsDevelop)
-            {
-                app.UseCodeFirst();
-            }
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHealthChecks(FrameworkConstant.HEALTH_ROUTE);
