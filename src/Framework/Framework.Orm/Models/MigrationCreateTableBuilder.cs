@@ -16,7 +16,7 @@ namespace Framework.Orm
         {
             _operation.Columns.Add(new MigrationColumn
             {
-                Name = $"_{_operation.TableName}{DelimitersConstant.UNDERSCORE}{SQLConstant.ID}",
+                Name = $"{_operation.TableName}{DelimitersConstant.UNDERSCORE}{SQLConstant.ID}",
                 Type = typeof(long),
                 ColumnOptions = new SugarColumn() { IsPrimaryKey = true, IsIdentity = true }
             });

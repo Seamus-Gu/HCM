@@ -133,7 +133,8 @@
     <value>This email address is already registered. Please use a different email address.</value>
   </data>
   <data name="UserNameExist" xml:space="preserve">
-    <value>Username already exists. Please try another one.</value>
+    <value>Username already exists. Please try another one.
+</value>
   </data>
   <data name="UserNotExist" xml:space="preserve">
     <value>Sorry, your account: {0} does not exist.</value>

@@ -3,7 +3,6 @@ using Framework.Core.Configs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using SqlSugar;
-using System.Dynamic;
 using System.Reflection;
 
 namespace Framework.Orm
@@ -69,7 +68,9 @@ namespace Framework.Orm
             return result;
         }
 
-        private static void HandleRollback(
+
+
+        private static void HandleUp(
             SystemConfig system,
             SqlSugarScope scope,
             List<ConnectionConfig> list,
@@ -78,10 +79,59 @@ namespace Framework.Orm
             foreach (var conn in list)
             {
                 var db = scope.GetConnectionScope(conn.ConfigId);
-                db.CodeFirst.InitTables<MigrationHistory>();
+                if (!db.DbMaintenance.IsAnyTable(nameof(MigrationHistory)))
+                {
+                    db.CodeFirst.InitTables<MigrationHistory>();
+                }
+
+                var appliedNames = db.Queryable<MigrationHistory>()
+                    .Where(x => x.Success && x.Module == App.AppName)
+                    .Select(x => x.MigrationName)
+                    .ToList()
+                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+                foreach (var migration in migrations)
+                {
+                    if (appliedNames.Contains(migration.Name))
+                    {
+                        continue;
+                    }
+
+                    ExecuteMigration(
+                        db,
+                        system,
+                        migration,
+                        migration.Instance.GetUpOperations(),
+                        onSuccess: () =>
+                        {
+                            db.Insertable(new MigrationHistory
+                            {
+                                Version = system.Version,
+                                MigrationName = migration.Name,
+                                Module = App.AppName,
+                                Success = true,
+                                CreatedAt = DateTime.Now
+                            }).ExecuteCommand();
+
+                            appliedNames.Add(migration.Name);
+                        });
+                }
+            }
+        }
+
+        private static void HandleRollback(
+        SystemConfig system,
+        SqlSugarScope scope,
+        List<ConnectionConfig> list,
+        List<MigrationEntry> migrations)
+        {
+            foreach (var conn in list)
+            {
+                var db = scope.GetConnectionScope(conn.ConfigId);
+                EnsureMigrationHistoryTable(db);
 
                 var rollbackNames = db.Queryable<MigrationHistory>()
-                    .Where(x => x.Version == system.Version && x.Success)
+                    .Where(x => x.Version == system.Version && x.Success && x.Module == App.AppName)
                     .Select(x => x.MigrationName)
                     .ToList()
                     .ToHashSet(StringComparer.OrdinalIgnoreCase);
@@ -108,49 +158,16 @@ namespace Framework.Orm
             }
         }
 
-        private static void HandleUp(
-            SystemConfig system,
-            SqlSugarScope scope,
-            List<ConnectionConfig> list,
-            List<MigrationEntry> migrations)
+        private static void EnsureMigrationHistoryTable(SqlSugarScopeProvider db)
         {
-            foreach (var conn in list)
+            var tableName = db.EntityMaintenance.GetTableName<MigrationHistory>();
+            var exists = db.DbMaintenance
+                .GetTableInfoList(false)
+                .Any(x => string.Equals(x.Name, tableName, StringComparison.OrdinalIgnoreCase));
+
+            if (!exists)
             {
-                var db = scope.GetConnectionScope(conn.ConfigId);
                 db.CodeFirst.InitTables<MigrationHistory>();
-
-                var appliedNames = db.Queryable<MigrationHistory>()
-                    .Where(x => x.Success)
-                    .Select(x => x.MigrationName)
-                    .ToList()
-                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
-
-                foreach (var migration in migrations)
-                {
-                    if (appliedNames.Contains(migration.Name))
-                    {
-                        continue;
-                    }
-
-                    ExecuteMigration(
-                        db,
-                        system,
-                        migration,
-                        migration.Instance.GetUpOperations(),
-                        onSuccess: () =>
-                        {
-                            db.Insertable(new MigrationHistory
-                            {
-                                Version = system.Version,
-                                MigrationName = migration.Name,
-                                Path = migration.Path,
-                                Success = true,
-                                CreatedAt = DateTime.Now
-                            }).ExecuteCommand();
-
-                            appliedNames.Add(migration.Name);
-                        });
-                }
             }
         }
 
@@ -181,7 +198,7 @@ namespace Framework.Orm
                 {
                     Version = system.Version,
                     MigrationName = migration.Name,
-                    Path = migration.Path,
+                    Module = App.AppName,
                     Success = false,
                     ErrorMessage = ex.ToString(),
                     CreatedAt = DateTime.Now
@@ -217,7 +234,10 @@ namespace Framework.Orm
                         return;
                     }
 
-                    var typeBuilder = db.DynamicBuilder().CreateClass(op.TableName, new SugarTable());
+                    var typeBuilder = db.DynamicBuilder().CreateClass(op.TableName, new SugarTable
+                    {
+                        TableDescription = op.TableDescription
+                    });
                     foreach (var column in op.Columns)
                     {
                         typeBuilder.CreateProperty(column.Name, column.Type, column.ColumnOptions ?? new SugarColumn());
@@ -264,13 +284,17 @@ namespace Framework.Orm
                     {
                         foreach (var values in op.DataValues)
                         {
-                            IDictionary<string, object?> row = new ExpandoObject();
+                            var row = new Dictionary<string, object?>();
                             for (var i = 0; i < op.DataColumns.Count; i++)
                             {
                                 row[op.DataColumns[i]] = values[i];
                             }
 
-                            db.InsertableByObject((object)row).AS(op.TableName).ExecuteCommand();
+                            db.Insertable(row)
+                                .AS(op.TableName)
+                                .ExecuteCommand();
+
+                            //db.Insertable((object)row).InsertBuilder op.TableName).ExecuteCommand();
                         }
 
                         break;

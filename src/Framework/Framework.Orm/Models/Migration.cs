@@ -59,9 +59,9 @@ namespace Framework.Orm
         /// rolling back schema or data changes.</remarks>
         protected abstract void Down();
 
-        protected MigrationCreateTableBuilder CreateTable(string tableName)
+        protected MigrationCreateTableBuilder CreateTable(string tableName, string? tableDescription = null)
         {
-            var op = MigrationOperation.CreateTable(tableName);
+            var op = MigrationOperation.CreateTable(tableName, tableDescription);
             _operations.Add(op);
             return new MigrationCreateTableBuilder(op);
         }

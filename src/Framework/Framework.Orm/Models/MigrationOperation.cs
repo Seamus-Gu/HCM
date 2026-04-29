@@ -15,6 +15,11 @@ namespace Framework.Orm
         public string? TableName { get; init; }
 
         /// <summary>
+        /// Gets the comment or descriptive text associated with the table.
+        /// </summary>
+        public string? TableDescription { get; init; }
+
+        /// <summary>
         /// Gets the collection of columns included in the migration operation.
         /// </summary>
         /// <remarks>The returned list contains the definitions of all columns affected by this migration.
@@ -49,8 +54,8 @@ namespace Framework.Orm
         /// </summary>
         /// <param name="tableName">The name of the table to be created. Cannot be null or empty.</param>
         /// <returns>A MigrationOperation configured to create the specified table.</returns>
-        public static MigrationOperation CreateTable(string tableName)
-            => new() { Action = MigrationActionEnum.CreateTable, TableName = tableName };
+        public static MigrationOperation CreateTable(string tableName, string? tableDescription)
+            => new() { Action = MigrationActionEnum.CreateTable, TableName = tableName, TableDescription = tableDescription };
 
         /// <summary>
         /// Creates a migration operation that drops the specified table from the database schema.

@@ -23,24 +23,24 @@ namespace Framework.WebApi
 
             if (context.Exception is RpcException rpc)
             {
-                context.Result = CreateContentResult(rpc.Status.Detail);
+                var parsed = JsonUtil.Deseriallize<Result>(rpc.Status.Detail);
+                context.Result = parsed is not null
+                    ? CreateContentResult(parsed)
+                    : CreateContentResult(rpc.Status.Detail);
             }
             else if (context.Exception is HttpException httpEx)
             {
                 var result = new Result(httpEx);
-
                 context.Result = CreateContentResult(result, httpEx.HttpCode);
             }
             else if (context.Exception is CodeException codeEx)
             {
                 var result = new Result(codeEx);
-
                 context.Result = CreateContentResult(result);
             }
             else
             {
                 var result = new Result(context.Exception);
-
                 context.Result = CreateContentResult(result, HttpStatusCode.InternalServerError);
             }
 

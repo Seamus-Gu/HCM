@@ -24,9 +24,9 @@ namespace Framework.Orm
         public string MigrationName { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the file system path associated with this instance.
+        /// Gets or sets the list of modules associated with the current context.
         /// </summary>
-        public string Path { get; set; } = string.Empty;
+        public string Module { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets a value indicating whether the operation completed successfully.
