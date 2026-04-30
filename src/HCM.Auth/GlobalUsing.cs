@@ -1,0 +1,12 @@
+﻿global using Framework.Core;
+global using Framework.Grpc;
+global using Framework.Platform;
+global using Framework.Security;
+global using Framework.Validation;
+global using Framework.WebApi;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.Localization;
+global using HCM.Api.Core;
+global using HCM.Auth.Dto;
+global using HCM.Auth.Interfaces;
+global using HCM.Auth.Resources;

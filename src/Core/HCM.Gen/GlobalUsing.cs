@@ -1,0 +1,13 @@
+﻿global using Framework.Core;
+global using Framework.Platform;
+global using Framework.WebApi;
+global using Microsoft.AspNetCore.Mvc;
+global using HCM.Gen.Dto;
+global using HCM.Gen.Entities;
+global using HCM.Gen.Enums;
+global using HCM.Gen.Interfaces;
+global using HCM.Gen.Repositories;
+global using SqlSugar;
+global using System.ComponentModel;
+global using System.Text;
+global using System.Text.RegularExpressions;

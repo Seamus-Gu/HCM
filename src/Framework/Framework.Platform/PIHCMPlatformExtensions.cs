@@ -23,24 +23,24 @@ using System.Text.Json.Serialization;
 
 namespace Framework.Platform
 {
-    public static class PIHCMPlatformExtensions
+    public static class HCMPlatformExtensions
     {
         /// <summary>
-        /// 为 WebApplicationBuilder 实例添加 PIHCM 平台所需的核心服务和配置，包括控制器、JSON 选项、本地化、健康检查、服务发现、ID 生成等功能。
+        /// 为 WebApplicationBuilder 实例添加 HCM 平台所需的核心服务和配置，包括控制器、JSON 选项、本地化、健康检查、服务发现、ID 生成等功能。
         /// </summary>
         /// <remarks>此方法应在应用程序启动时调用，以确保平台相关的服务和配置被正确注册。可通过 configureModules 参数扩展或自定义服务注册流程。部分服务如
         /// Consul、日志、ORM 等可根据实际需求进行启用或调整。</remarks>
         /// <param name="builder">要扩展的 WebApplicationBuilder 实例，作为应用程序服务和配置的注册入口。</param>
         /// <param name="configureModules">可选的自定义模块配置委托。用于在平台服务注册过程中，进一步配置服务集合和应用配置。可以为 null。</param>
         /// <returns>配置完成的 WebApplicationBuilder 实例，可用于后续的应用程序构建和启动。</returns>
-        public static WebApplicationBuilder AddPIHCMPlatform(this WebApplicationBuilder builder, Action<IServiceCollection, IConfiguration>? configureModules = null)
+        public static WebApplicationBuilder AddHCMPlatform(this WebApplicationBuilder builder, Action<IServiceCollection, IConfiguration>? configureModules = null)
         {
-            return builder.AddPIHCMPlatform(_ => { }, configureModules);
+            return builder.AddHCMPlatform(_ => { }, configureModules);
         }
 
-        public static WebApplicationBuilder AddPIHCMPlatform(this WebApplicationBuilder builder, Action<PIHCMPlatformOptions>? configureOptions, Action<IServiceCollection, IConfiguration>? configureModules = null)
+        public static WebApplicationBuilder AddHCMPlatform(this WebApplicationBuilder builder, Action<HCMPlatformOptions>? configureOptions, Action<IServiceCollection, IConfiguration>? configureModules = null)
         {
-            var options = new PIHCMPlatformOptions();
+            var options = new HCMPlatformOptions();
             configureOptions?.Invoke(options);
 
             var configuration = builder.Configuration;
@@ -120,14 +120,14 @@ namespace Framework.Platform
         }
 
         /// <summary>
-        /// Configures the PIHCM platform middleware and endpoints for the application.
+        /// Configures the HCM platform middleware and endpoints for the application.
         /// </summary>
         /// <remarks>This method sets up essential middleware components such as HTTPS redirection,
         /// localization, routing, health checks, and controller endpoints. In development environments, it also enables
-        /// OpenAPI endpoints. Call this method during application startup to ensure the PIHCM platform is properly
+        /// OpenAPI endpoints. Call this method during application startup to ensure the HCM platform is properly
         /// initialized.</remarks>
         /// <param name="app">The application builder used to configure the request pipeline.</param>
-        public static void UsePIHCMPlatform(this IApplicationBuilder app)
+        public static void UseHCMPlatform(this IApplicationBuilder app)
         {
             app.ConfigureApp();
 

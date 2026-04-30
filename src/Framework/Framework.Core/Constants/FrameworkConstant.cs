@@ -5,11 +5,11 @@
         #region 项目基础
         public const string SYSTEM = "System";
         // 项目前缀
-        public const string PREFIX = "PIHCM";
+        public const string PREFIX = "HCM";
         // 数据库雪花Id
         public const string SNOW_ID = "SnowId";
         // 基础配置项
-        public const string COMMON = "PIHCM.Common";
+        public const string COMMON = "HCM.Common";
         #endregion
 
         #region App

@@ -1,0 +1,24 @@
+{
+    "profiles": {
+        "HCM.Gateway": {
+            "commandName": "Project",
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "dotnetRunMessages": true,
+            "applicationUrl": "https://localhost:5000;http://localhost:19000"
+        },
+        "Container": {
+            "commandName": "Docker",
+            "launchBrowser": false,
+            "environmentVariables": {
+                "ASPNETCORE_URLS": "https://+:443;http://+:80"
+            },
+            "httpPort": 19000,
+            "sslPort": 5000,
+            "useSSL": true,
+            "containerRunArguments": "--network hcm --name hcm_gateway"
+        }
+    },
+    "$schema": "https://json.schemastore.org/launchsettings.json"
+}

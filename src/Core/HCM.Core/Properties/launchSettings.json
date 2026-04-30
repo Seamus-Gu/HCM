@@ -1,0 +1,24 @@
+{
+    "profiles": {
+        "HCM.Core": {
+            "commandName": "Project",
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "dotnetRunMessages": true,
+            "applicationUrl": "https://localhost:5020;http://localhost:19020"
+        },
+        "Container": {
+            "commandName": "Docker",
+            "launchBrowser": false,
+            "environmentVariables": {
+                "ASPNETCORE_URLS": "https://+:443;http://+:80"
+            },
+            "httpPort": 19020,
+            "sslPort": 5020,
+            "useSSL": true,
+            "containerRunArguments": "--network hcm --name hcm_core"
+        }
+    },
+    "$schema": "https://json.schemastore.org/launchsettings.json"
+}

@@ -1,6 +1,0 @@
-@PIHCM.Payroll_HostAddress = http://localhost:5083
-
-GET {{PIHCM.Payroll_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

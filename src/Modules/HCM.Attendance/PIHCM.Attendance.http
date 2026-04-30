@@ -1,0 +1,6 @@
+@HCM.Attendance_HostAddress = http://localhost:5166
+
+GET {{HCM.Attendance_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

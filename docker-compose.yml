@@ -1,6 +1,6 @@
 services:
-  pihcm.gateway:
-    image: ${DOCKER_REGISTRY-}pihcmgateway
+  hcm.gateway:
+    image: ${DOCKER_REGISTRY-}hcmgateway
     build:
       context: .
-      dockerfile: src/PIHCM.Gateway/Dockerfile
+      dockerfile: src/HCM.Gateway/Dockerfile

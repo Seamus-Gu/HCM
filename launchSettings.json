@@ -1,11 +1,11 @@
 {
-  "profiles": {
-    "Docker Compose": {
-      "commandName": "DockerCompose",
-      "commandVersion": "1.0",
-      "serviceActions": {
-        "pihcm.gateway": "StartDebugging"
-      }
+    "profiles": {
+        "Docker Compose": {
+            "commandName": "DockerCompose",
+            "commandVersion": "1.0",
+            "serviceActions": {
+                "hcm.gateway": "StartDebugging"
+            }
+        }
     }
-  }
 }

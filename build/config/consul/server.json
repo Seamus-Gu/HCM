@@ -1,5 +1,5 @@
 {
-    "node_name": "pihcm-consul-server",
+    "node_name": "hcm-consul-server",
     "server": true,
     "ui": true,
     "data_dir": "/consul/data",

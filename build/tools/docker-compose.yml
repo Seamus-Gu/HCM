@@ -12,9 +12,9 @@ x-hosts: &self-hosts
             max-file: "3"
 
 services:
-    pihcm_redis:
+    hcm_redis:
         image: ${DOCKER_REGISTRY}/tools/redis:7.2-alpine
-        container_name: pihcm_redis
+        container_name: hcm_redis
         restart: always
         ports:
             - ${REDIS_PORT}:6379
@@ -24,18 +24,18 @@ services:
             - ${DEVELOP_PATH}/redis/localtime:/etc/localtime:ro
         command: redis-server /etc/redis/redis.conf --requirepass ${REDIS_PASSWORD}
         healthcheck:
-            test: ["CMD", "redis-cli", "ping"]
+            test: [ "CMD", "redis-cli", "ping" ]
             interval: 10s
             timeout: 10s
             retries: 5
             start_period: 10s
         networks:
-            - pihcm
+            - hcm
         <<: *self-hosts
 
-    pihcm_consul:
+    hcm_consul:
         image: ${DOCKER_REGISTRY}/tools/consul:1.21.5
-        container_name: pihcm_consul
+        container_name: hcm_consul
         restart: always
         volumes:
             - ${DEVELOP_PATH}/config/consul/server.json:/consul/config/server.json
@@ -45,21 +45,21 @@ services:
             - ${CONSUL_PORT}:8500
         #   - '${CONSUL_NODE_PORT}:8300'
         #   - '${CONSUL_DNS_PORT}:8600'
-        command: agent -server -ui -bootstrap-expect=1 -client=0.0.0.0 -data-dir consul/data
+        command: agent -server -ui -bootstrap-expect=1 -client=0.0.0.0 -data-dir
+            consul/data
         healthcheck:
-            test:
-                ["CMD", "curl", "-f", "http://localhost:8500/v1/status/leader"]
+            test: [ "CMD", "curl", "-f", "http://localhost:8500/v1/status/leader" ]
             interval: 30s
             timeout: 10s
             retries: 5
             start_period: 30s
         networks:
-            - pihcm
+            - hcm
         <<: *self-hosts
 
-    pihcm_loki:
+    hcm_loki:
         image: ${DOCKER_REGISTRY}/tools/loki:3.5.12
-        container_name: pihcm_loki
+        container_name: hcm_loki
         restart: always
         ports:
             - ${LOKI_PORT}:3100
@@ -67,11 +67,11 @@ services:
             - ${DEVELOP_PATH}/loki/data:/loki
         command: -config.file=/etc/loki/local-config.yaml
         networks:
-            - pihcm
+            - hcm
 
-    pihcm_grafana:
+    hcm_grafana:
         image: ${DOCKER_REGISTRY}/tools/grafana:11.6.13
-        container_name: pihcm_grafana
+        container_name: hcm_grafana
         restart: always
         ports:
             - ${GRAFANA_PORT}:3000
@@ -82,11 +82,11 @@ services:
             - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
             # - GF_INSTALL_PLUGINS=grafana-loki-datasource
         depends_on:
-            - pihcm_loki
+            - hcm_loki
         networks:
-            - pihcm
+            - hcm
 networks:
-    pihcm:
+    hcm:
         external: true
         driver: bridge
-        name: pihcm
+        name: hcm

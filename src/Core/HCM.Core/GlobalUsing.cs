@@ -1,0 +1,16 @@
+﻿global using Framework.Core;
+global using Framework.Platform;
+global using Framework.WebApi;
+global using MagicOnion;
+global using MagicOnion.Server;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.Localization;
+global using HCM.Api.Core;
+global using HCM.Api.Core.Dto;
+global using HCM.Api.Core.Entities;
+global using HCM.Core.Entities;
+global using HCM.Core.Enums;
+global using HCM.Core.Interfaces;
+global using HCM.Core.Repositories;
+global using HCM.Core.Resources;
+global using SqlSugar;

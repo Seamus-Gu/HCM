@@ -6,11 +6,11 @@
         },
         "Loki": {
             "Enabled": true,
-            "Url": "http://pihcm_loki:5006"
+            "Url": "http://hcm_loki:5006"
         }
     },
     "Redis": {
-        "Host": "pihcm_redis",
+        "Host": "hcm_redis",
         "Port": "6379",
         "Password": "piHcm2026@redis"
     }

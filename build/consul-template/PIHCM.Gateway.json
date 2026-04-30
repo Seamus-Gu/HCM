@@ -4,7 +4,7 @@
             "UseServiceDiscovery": true,
             "DownstreamPathTemplate": "/{everything}",
             "DownstreamScheme": "https",
-            "ServiceName": "PIHCM.Auth",
+            "ServiceName": "HCM.Auth",
             "LoadBalancerOptions": {
                 "Type": "LeastConnection"
             },
@@ -17,7 +17,7 @@
             "UseServiceDiscovery": true,
             "DownstreamPathTemplate": "/{everything}",
             "DownstreamScheme": "https",
-            "ServiceName": "PIHCM.Core",
+            "ServiceName": "HCM.Core",
             "LoadBalancerOptions": {
                 "Type": "LeastConnection"
             },
@@ -30,7 +30,7 @@
             "UseServiceDiscovery": true,
             "DownstreamPathTemplate": "/{everything}",
             "DownstreamScheme": "https",
-            "ServiceName": "PIHCM.Gen",
+            "ServiceName": "HCM.Gen",
             "LoadBalancerOptions": {
                 "Type": "LeastConnection"
             },

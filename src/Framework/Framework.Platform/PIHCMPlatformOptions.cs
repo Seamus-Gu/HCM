@@ -1,12 +1,12 @@
 namespace Framework.Platform
 {
     /// <summary>
-    /// Provides configuration options for the PIHCM platform, enabling or disabling core features such as SQL Sugar
+    /// Provides configuration options for the HCM platform, enabling or disabling core features such as SQL Sugar
     /// integration, logging, and Redis caching.
     /// </summary>
     /// <remarks>Use this class to configure platform-wide behaviors at application startup. Changing these
     /// options affects how the platform interacts with data storage, logging, and caching subsystems.</remarks>
-    public sealed class PIHCMPlatformOptions
+    public sealed class HCMPlatformOptions
     {
         /// <summary>
         /// Gets or sets a value indicating whether the SqlSugar ORM integration is enabled.
